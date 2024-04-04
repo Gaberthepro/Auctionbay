@@ -1,4 +1,84 @@
 img {
-    max-height: 100%;
-    max-width: 100%;
-  }
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.name-label {
+  white-space: nowrap;
+}
+
+.name-label label {
+  display: inline-block;
+  width: 35%;
+  margin-right: 15px;
+  text-align: left;
+}
+
+.name-input {
+  white-space: nowrap;
+}
+
+.name-input input {
+  display: inline-block;
+  width: 35%;
+  margin-right: 15px;
+  border-radius: 15px;
+}
+
+.other-inputs {
+  margin-left: 12.5%;
+}
+
+.email-label {
+  text-align: left;
+  margin-left: 13.5%;
+}
+
+.other-inputs input {
+  border-radius: 15px;
+  width: 83.5%;
+}
+
+.inputs {
+  margin-top: 0.9rem;
+}
+
+.btn-warning {
+  background-color: #f2ff47 !important;
+  border-color: #f2ff47 !important;
+}
+
+.btn-warning:hover {
+  background-color: #f9ff90 !important;
+  border-color: #f9ff90 !important;
+  cursor: pointer;
+}
+
+#submit {
+  margin-top: 2rem;
+}
+
+#login {
+  background-color: #ffffff;
+  border-radius: 25px;
+  margin-top: 1rem;
+}
+
+.Hello {
+  margin: 2.5rem;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+}
+
+.logo {
+  margin: 2.5rem;
+}
+
+.toLogin {
+  margin: 2.5rem;
+}
