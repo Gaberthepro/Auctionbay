@@ -1,7 +1,33 @@
 import { Fragment } from "react/jsx-runtime";
+import { useState } from "react";
 import "./register.css";
+import axios from "axios";
 
 function register() {
+  const [Name, setName] = useState("");
+  const [Surname, setSurname] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [RePassword, setRePassword] = useState("");
+
+  const handleRegister = () => {
+    if (Password !== RePassword) {
+      alert("Password don't match")
+    } else {
+      const RegisterData = {
+        name: Name,
+        surname: Surname,
+        email: Email,
+        password: Password,
+        imgURl: ""
+      };
+      axios
+        .post("http://localhost:3000/user/", RegisterData)
+        .then((response) => console.log(response.data))
+        .catch((error) => console.error("Error:", error));
+    }
+  };
+
   return (
     <Fragment>
       <div className="container text-center">
@@ -21,7 +47,7 @@ function register() {
               <h1>Hello!</h1>
               <p>Please enter your details</p>
             </div>
-            <form>
+            <form onSubmit={handleRegister}>
               <div className="name-label">
                 <label
                   htmlFor="exampleFormControlInput1"
@@ -42,12 +68,16 @@ function register() {
                   className="form-control"
                   placeholder="Name"
                   aria-label="Name"
+                  value={Name}
+                  onChange={(e) => setName(e.target.value)}
                 />
                 <input
                   type="text"
                   className="form-control"
                   placeholder="Surname"
                   aria-label="Surname"
+                  value={Surname}
+                  onChange={(e) => setSurname(e.target.value)}
                 />
               </div>
 
@@ -65,8 +95,9 @@ function register() {
                   <input
                     type="email"
                     className="form-control"
-                    id="exampleFormControlInput1"
                     placeholder="Email"
+                    value={Email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
@@ -85,8 +116,9 @@ function register() {
                   <input
                     type="password"
                     className="form-control"
-                    id="exampleFormControlInput1"
                     placeholder="Password"
+                    value={Password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
@@ -105,8 +137,9 @@ function register() {
                   <input
                     type="password"
                     className="form-control"
-                    id="exampleFormControlInput1"
                     placeholder="Password"
+                    value={RePassword}
+                    onChange={(e) => setRePassword(e.target.value)}
                   />
                 </div>
               </div>
@@ -120,7 +153,7 @@ function register() {
               <p>
                 Already have an account?{" "}
                 <a className="link-opacity-100" href="/Login">
-                  Create an account
+                  Log in
                 </a>
               </p>
             </div>
