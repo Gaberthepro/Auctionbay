@@ -1,7 +1,6 @@
 import { Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import "./login.css";
-import axios from "axios";
 
 function Login() {
   const [Email, setEmail] = useState("");

@@ -1,0 +1,30 @@
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.btn-link {
+  color: black !important;
+  text-decoration: none !important;
+  font-weight: bold !important;
+  padding: 0 !important;
+}
+
+.btn-dark {
+  color: white !important;
+  border-radius: 1rem !important;
+}
+
+.navbar-text {
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem !important;
+}
+
+.gap {
+  display: inline-block;
+  margin:0px 0.375rem 0px 0.375rem;
+}
+
+.navbar-expand-lg{
+    padding: 20px 32px 20px 32px !important;
+}
