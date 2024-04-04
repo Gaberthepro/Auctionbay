@@ -1,0 +1,39 @@
+.title-group {
+  margin-top: 8rem;
+  text-align: center;
+}
+
+.title {
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  font-size: 4rem;
+}
+
+.body {
+  font-family: "Inter", sans-serif;
+  line-height: 1.5rem;
+  color: #071015;
+}
+
+.btn-primary {
+  background-color: #f4ff47 !important;
+  border-radius: 1rem !important;
+  color: black !important;
+  border: #f4ff47 !important;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.btn-primary:hover {
+  color: black;
+  background-color: #f3ff47cc !important;
+}
+
+.img {
+  position: absolute;
+  width: 71.5rem;
+  height: 50rem;
+  left: 9.25rem;
+  top: 31.313rem;
+  border: 0.5rem solid #272d2d;
+  border-radius: 2rem;
+}
