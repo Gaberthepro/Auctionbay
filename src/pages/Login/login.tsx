@@ -22,7 +22,9 @@ function Login() {
         localStorage.setItem("access_token", response.data.access_token)
       )
       .catch((error) => console.error("Error:", error));
-      navigate('/home')
+    setTimeout(() => {
+      navigate("/Home");
+    }, 1000);
   };
 
   return (
