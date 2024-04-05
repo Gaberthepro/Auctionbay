@@ -16,11 +16,13 @@ function Login() {
       password: Password
     };
 
+    const now = new Date().getTime();
     axios
       .post("http://localhost:3000/login", LoginData)
-      .then((response) =>
-        localStorage.setItem("access_token", response.data.access_token)
-      )
+      .then((response) => {
+        localStorage.setItem("access_token", response.data.access_token);
+        localStorage.setItem("setupTime", JSON.stringify(now));
+      })
       .catch((error) => console.error("Error:", error));
     setTimeout(() => {
       navigate("/Home");
