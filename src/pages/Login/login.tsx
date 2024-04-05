@@ -1,12 +1,29 @@
 import { Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import "./login.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = () => {};
+  const handleLogin = (event: any) => {
+    event.preventDefault();
+    const LoginData = {
+      email: Email,
+      password: Password
+    };
+
+    axios
+      .post("http://localhost:3000/login", LoginData)
+      .then((response) =>
+        localStorage.setItem("access_token", response.data.access_token)
+      )
+      .catch((error) => console.error("Error:", error));
+      navigate('/home')
+  };
 
   return (
     <Fragment>

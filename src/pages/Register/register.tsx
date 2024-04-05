@@ -22,7 +22,7 @@ function register() {
         imgURl: ""
       };
       axios
-        .post("http://localhost:3000/user/", RegisterData)
+        .post("http://localhost:3000/user/signup", RegisterData)
         .then((response) => console.log(response.data))
         .catch((error) => console.error("Error:", error));
     }
