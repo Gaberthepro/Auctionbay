@@ -2,6 +2,8 @@ import { Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import "./register.css";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function register() {
   const [Name, setName] = useState("");
@@ -9,10 +11,20 @@ function register() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [RePassword, setRePassword] = useState("");
-
-  const handleRegister = () => {
+  const navigate = useNavigate();
+  var Status: number;
+  const handleRegister = async (event: any) => {
+    event.preventDefault();
     if (Password !== RePassword) {
-      alert("Password don't match")
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password don't match",
+        showConfirmButton: false
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } else {
       const RegisterData = {
         name: Name,
@@ -21,10 +33,37 @@ function register() {
         password: Password,
         imgURl: ""
       };
-      axios
+      await axios
         .post("http://localhost:3000/user/signup", RegisterData)
-        .then((response) => console.log(response.data))
-        .catch((error) => console.error("Error:", error));
+        .then((response) => (Status = response.status))
+        .catch((error) => (Status = error.response.status));
+
+      if (Status == 201) {
+        const LoginData = {
+          email: RegisterData.email,
+          password: RegisterData.password
+        };
+
+        const now = new Date().getTime();
+        axios
+          .post("http://localhost:3000/login", LoginData)
+          .then((response) => {
+            localStorage.setItem("access_token", response.data.access_token);
+            localStorage.setItem("setupTime", JSON.stringify(now));
+          })
+          .catch((error) => console.error("Error:", error));
+        Swal.fire({
+          icon: "success",
+          title: "Registration successful",
+          timer: 1000,
+          showConfirmButton: false
+        });
+        setTimeout(() => {
+          navigate("/Home");
+        }, 1000);
+      } else {
+        window.location.reload();
+      }
     }
   };
 
