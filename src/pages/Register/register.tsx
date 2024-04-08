@@ -11,8 +11,17 @@ function register() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [RePassword, setRePassword] = useState("");
+
+  const [MessageContainerContent, setMessageContainerContent] = useState(
+    "Please enter your details"
+  );
+  const [MessageContainerClass, setMessageContainerClass] =
+    useState("message-container");
+
   const navigate = useNavigate();
   var Status: number;
+  var errorMessage: string;
+
   const handleRegister = async (event: any) => {
     event.preventDefault();
     if (Password !== RePassword) {
@@ -36,7 +45,12 @@ function register() {
       await axios
         .post("http://localhost:3000/user/signup", RegisterData)
         .then((response) => (Status = response.status))
-        .catch((error) => (Status = error.response.status));
+        .catch(
+          (error) => (
+            (Status = error.response.status),
+            (errorMessage = error.response.data.message)
+          )
+        );
 
       if (Status == 201) {
         const LoginData = {
@@ -62,7 +76,10 @@ function register() {
           navigate("/Home");
         }, 1000);
       } else {
-        window.location.reload();
+        //window.location.reload();
+        setMessageContainerClass("message-container--error");
+        setMessageContainerContent(errorMessage);
+        console.log(errorMessage);
       }
     }
   };
@@ -84,7 +101,9 @@ function register() {
             </div>
             <div className="Hello">
               <h1>Hello!</h1>
-              <p>Please enter your details</p>
+              <div className={MessageContainerClass}>
+                <p>{MessageContainerContent}</p>
+              </div>
             </div>
             <form onSubmit={handleRegister}>
               <div className="name-label">
@@ -135,6 +154,7 @@ function register() {
                     type="email"
                     className="form-control"
                     placeholder="Email"
+                    aria-label="Email"
                     value={Email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -156,6 +176,7 @@ function register() {
                     type="password"
                     className="form-control"
                     placeholder="Password"
+                    aria-label="Password"
                     value={Password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -176,7 +197,8 @@ function register() {
                   <input
                     type="password"
                     className="form-control"
-                    placeholder="Password"
+                    placeholder="Reapet Password"
+                    aria-label="Email"
                     value={RePassword}
                     onChange={(e) => setRePassword(e.target.value)}
                   />

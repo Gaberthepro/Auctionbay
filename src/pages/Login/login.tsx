@@ -3,13 +3,15 @@ import { useState } from "react";
 import "./login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Login() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  var Status: number;
   const navigate = useNavigate();
 
-  const handleLogin = (event: any) => {
+  const handleLogin = async (event: any) => {
     event.preventDefault();
     const LoginData = {
       email: Email,
@@ -17,16 +19,25 @@ function Login() {
     };
 
     const now = new Date().getTime();
-    axios
+    await axios
       .post("http://localhost:3000/login", LoginData)
       .then((response) => {
         localStorage.setItem("access_token", response.data.access_token);
         localStorage.setItem("setupTime", JSON.stringify(now));
       })
-      .catch((error) => console.error("Error:", error));
-    setTimeout(() => {
+      .catch((error) => (Status = error.response.data.statusCode));
+
+    if (Status != 401) {
       navigate("/Home");
-    }, 1000);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Incorrect email or password",
+        timer: 1500,
+        showConfirmButton: false
+      });
+    }
   };
 
   return (

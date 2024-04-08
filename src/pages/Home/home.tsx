@@ -23,7 +23,9 @@ export function Home() {
   return (
     <Fragment>
       <Navbar />
-      <h1>Hello {Name} {Surname}</h1>
+      <h1>
+        Hello {Name} {Surname}!
+      </h1>
     </Fragment>
   );
 }

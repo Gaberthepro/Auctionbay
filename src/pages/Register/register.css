@@ -82,3 +82,13 @@ img {
 .toLogin {
   margin: 2.5rem;
 }
+
+
+.message-container--error {
+  background-color: rgba(255, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+
+

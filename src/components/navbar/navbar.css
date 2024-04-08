@@ -1,4 +1,4 @@
-.avatar {
+.avatar-logo {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -22,9 +22,61 @@
 
 .gap {
   display: inline-block;
-  margin:0px 0.375rem 0px 0.375rem;
+  margin: 0px 0.375rem 0px 0.375rem;
 }
 
-.navbar-expand-lg{
-    padding: 20px 32px 20px 32px !important;
+.navbar-expand-lg {
+  padding: 20px 32px 20px 32px !important;
+}
+
+#navbar-loggedin {
+  background-color: #f6f6f4 !important;
+}
+
+.btn-group {
+  margin-left: 2rem;
+  height: 25% !important;
+  background-color: #ffffff;
+  border-radius: 32px !important;
+}
+
+.btn-outline-dark {
+  border: #ffffff !important;
+  border-radius: 32px !important;
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+}
+
+.dot {
+  height: 3.125rem;
+  width: 3.125rem;
+  background-color: #f4ff47;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.container {
+  background-color: #ffffff;
+  border-radius: 32px;
+}
+
+.plus-icon {
+  margin: 0;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  margin-bottom: 0.625rem;
+}
+
+.row-profile {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 3.125rem;
+  height: 3.125rem;
 }
