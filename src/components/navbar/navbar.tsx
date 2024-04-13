@@ -1,7 +1,7 @@
 import { Fragment } from "react/jsx-runtime";
 import "./navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faGear, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import Me from "../../services/me";
 import userData from "../../services/userData";
@@ -17,6 +17,7 @@ export function Navbar() {
   const [img, setImage] = useState(
     "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"
   );
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   useEffect(() => {
     Me(token)
@@ -40,7 +41,6 @@ export function Navbar() {
         console.error("There was an error fetching the data:", error);
       }
     };
-
     fetchUserData();
   }, [user_id]);
 
@@ -57,6 +57,28 @@ export function Navbar() {
   } else {
     onLanding = false;
   }
+
+  const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
+  const closeDropdown = (event: any) => {
+    if (!event.target.closest(".dropdown-toggle")) {
+      setIsDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", closeDropdown);
+    return () => {
+      document.removeEventListener("click", closeDropdown);
+    };
+  }, []);
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    window.location.assign("/");
+  };
 
   return (
     <Fragment>
@@ -154,10 +176,40 @@ export function Navbar() {
                       </span>
                     </div>
                     <div className="col">
-                      <img src={img} alt="Avatar" className="avatar" />
+                      <img
+                        src={img}
+                        alt="Avatar"
+                        className="avatar dropdown-toggle"
+                        onClick={toggleDropdown}
+                      />
                     </div>
                   </div>
                 </div>
+                {isDropdownVisible && (
+                  <div
+                    className="dropdown-menu show"
+                    style={{ marginLeft: "-4rem", textAlign: "center" }}
+                  >
+                    <button
+                      type="button"
+                      className="btn btn-outline-light"
+                      style={{ marginTop: "0.5rem" }}
+                    >
+                      <span style={{ marginRight: "0.5rem" }}>
+                        <FontAwesomeIcon icon={faGear} />
+                      </span>
+                      Profile settings
+                    </button>
+                    <button
+                      style={{ margin: "0.5rem" }}
+                      type="button"
+                      className="btn btn-outline-light"
+                      onClick={handleLogOut}
+                    >
+                      Log out
+                    </button>
+                  </div>
+                )}
               </li>
             </ul>
           </div>
