@@ -30,6 +30,9 @@ export function Navbar() {
 
   useEffect(() => {
     const fetchUserData = async () => {
+      if (!user_id) {
+        return;
+      }
       try {
         const response = await userData(user_id);
         setImage(response.data.imgURl);
@@ -95,47 +98,54 @@ export function Navbar() {
           </div>
         </nav>
       ) : (
-        <nav className="navbar navbar-expand-lg bg-light" id="navbar-loggedin">
-          <div className="container-fluid">
-            <div className="collapse navbar-collapse" id="navbarText">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <img
-                    src="src/assets/images/logo.png"
-                    alt="Avatar"
-                    className="avatar-logo"
-                  />
-                </li>
-                <div
-                  className="btn-group  btn-group-lg"
-                  role="group"
-                  aria-label="Basic radio toggle button group"
-                >
-                  <input
-                    type="radio"
-                    className="btn-check"
-                    name="btnradio"
-                    id="btnradio1"
-                    autoComplete="off"
-                  />
-                  <label className="btn btn-outline-dark" htmlFor="btnradio1">
-                    Auctions
-                  </label>
+        <nav className="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
+          <img
+            src="src/assets/images/logo.png"
+            alt="Avatar"
+            className="avatar-logo"
+          />
+          <div
+            className="btn-group  btn-group-lg"
+            role="group"
+            aria-label="Basic radio toggle button group"
+          >
+            <input
+              type="radio"
+              className="btn-check"
+              name="btnradio"
+              id="btnradio1"
+              autoComplete="off"
+            />
+            <label className="btn btn-outline-dark" htmlFor="btnradio1">
+              Auctions
+            </label>
 
-                  <input
-                    type="radio"
-                    className="btn-check"
-                    name="btnradio"
-                    id="btnradio2"
-                    autoComplete="off"
-                    defaultChecked
-                  />
-                  <label className="btn btn-outline-dark" htmlFor="btnradio2">
-                    Profile
-                  </label>
-                </div>
-              </ul>
-              <span className="navbar-text">
+            <input
+              type="radio"
+              className="btn-check"
+              name="btnradio"
+              id="btnradio2"
+              autoComplete="off"
+              defaultChecked
+            />
+            <label className="btn btn-outline-dark" htmlFor="btnradio2">
+              Profile
+            </label>
+          </div>
+          <div
+            className="navbar-collapse collapse w-100"
+            id="collapsingNavbar3"
+          >
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapsingNavbar3"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <ul className="nav navbar-nav ml-auto w-100 justify-content-end">
+              <li className="nav-item">
                 <div className="container">
                   <div className="row row-profile">
                     <div className="col">
@@ -148,8 +158,8 @@ export function Navbar() {
                     </div>
                   </div>
                 </div>
-              </span>
-            </div>
+              </li>
+            </ul>
           </div>
         </nav>
       )}
