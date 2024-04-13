@@ -1,17 +1,14 @@
 import { Fragment } from "react/jsx-runtime";
 import Navbar from "../../components/navbar/navbar";
 import { useEffect, useState } from "react";
-import axios from "axios";
-
+import Me from "../../services/me";
 export function Home() {
   const [Name, setName] = useState("");
   const [Surname, setSurname] = useState("");
   const token = localStorage.getItem("access_token");
+
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/me", {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+    Me(token)
       .then((response) => {
         setName(response.data.name);
         setSurname(response.data.surname);
@@ -19,7 +16,8 @@ export function Home() {
       .catch((error) => {
         console.error("There was an error fetching the data:", error);
       });
-  });
+  }, [token]);
+
   return (
     <Fragment>
       <Navbar />

@@ -2,6 +2,9 @@ import { Fragment } from "react/jsx-runtime";
 import "./navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import Me from "../../services/me";
+import userData from "../../services/userData";
 
 export function Navbar() {
   var isLoggedIn: boolean;
@@ -9,6 +12,34 @@ export function Navbar() {
   var currentURL = window.location.href;
   var parts = currentURL.split("/");
   var endpoint = parts[parts.length - 1];
+  const token = localStorage.getItem("access_token");
+  const [user_id, setUserID] = useState();
+  const [img, setImage] = useState(
+    "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"
+  );
+
+  useEffect(() => {
+    Me(token)
+      .then((response) => {
+        setUserID(response.data.id);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the data:", error);
+      });
+  }, [token]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await userData(user_id);
+        setImage(response.data.imgURl);
+      } catch (error) {
+        console.error("There was an error fetching the data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [user_id]);
 
   if (localStorage.getItem("access_token") === null) {
     isLoggedIn = false;
@@ -113,11 +144,7 @@ export function Navbar() {
                       </span>
                     </div>
                     <div className="col">
-                      <img
-                        src="https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"
-                        alt="Avatar"
-                        className="avatar"
-                      />
+                      <img src={img} alt="Avatar" className="avatar" />
                     </div>
                   </div>
                 </div>
