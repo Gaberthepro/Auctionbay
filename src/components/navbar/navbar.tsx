@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 import Me from "../../services/me";
 import userData from "../../services/userData";
 
-export function Navbar() {
+
+
+export function Navbar({ onShowModal }:any) {
   var isLoggedIn: boolean;
   var onLanding: boolean;
   var currentURL = window.location.href;
@@ -171,9 +173,14 @@ export function Navbar() {
                 <div className="container">
                   <div className="row row-profile">
                     <div className="col">
-                      <span className="dot">
-                        <FontAwesomeIcon className="plus-icon" icon={faPlus} />
-                      </span>
+                      <a type="button">
+                        <span className="dot" onClick={onShowModal}>
+                          <FontAwesomeIcon
+                            className="plus-icon"
+                            icon={faPlus}
+                          />
+                        </span>
+                      </a>
                     </div>
                     <div className="col">
                       <img

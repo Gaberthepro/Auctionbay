@@ -29,7 +29,7 @@ export function Landing() {
         )}
         <img
           className="img"
-          src="https://s3-alpha-sig.figma.com/img/2013/78e4/774a00e95894930c9bb5dc4f77a1322d?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=baNRyrA4SDHI74T15Yf580HrYEa~27IOu1JVfJEFs6WZswFT9HhZh2vXoVAERLAfuMwS9u~aAz96c7fyZtyOSym~eFX5q6cGfmuQQmwp-fFQMPEvz6-1AUUxDs2cWWc2B0cycRnyA9D7Y3rJXo4RXuciaRN4QwinsOPJxWWCxkU-yr4k-VkhY8tulNYl5AOf7-Z9X8ftA8EtwuUwnxj9Lxyz-E7SHPp71TrVzpXIsAnfmtAWFwaPxgNshZ83sVDd51PYwp7x0IrccagDoHIJKL32hZrwwiTQ2eMZJC4eRspNOWLeIeQLC~W2F0xpK6u4SKDJcX7K8kIUnZoTXQz1Gg__"
+          src="https://s3-alpha-sig.figma.com/img/2013/78e4/774a00e95894930c9bb5dc4f77a1322d?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YT6YUBJr-z~-cGUXPcxfIrvz~tS9YcVN59G8UHVLB4gwvarhrdkl8vClNpmy-NvpcBsolT4mz-iCwHSNZ18jKuE4-I3FrxiomubnYvuURpeu2yswaFiLAVfMt-~SdQb0y5ZxgMnXadDygVjYcnCf~mtLomATvpCrxJKIpe59UfnuUC1vhM2TAUh2NqoYb0HOXO1L1HpXNFWiQ5fbkCQ9ZlZ43zcO8rNC6PNRUpLsroXRKJcV8ueGEYTwRLRcE4imo~KWVcIB1GBKh9WFiblxpjf3evEzlE7xL4fFOHobOma-Y88dEPn2Yx4f6J02qBPfZEenfPUrYrDf6Wurx7M~Zg__"
         ></img>
       </div>
     </Fragment>

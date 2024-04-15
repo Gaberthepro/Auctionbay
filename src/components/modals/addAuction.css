@@ -1,0 +1,85 @@
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.modal-content {
+  border-radius: 1rem !important;
+}
+
+.image {
+  border-radius: 1rem;
+  width: Fill(31.313rem);
+  height: Fixed(10.5rem);
+}
+
+.image-container .overlay-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 2px solid black;
+  border-radius: 1rem;
+}
+
+.image-container .trash {
+  position: absolute;
+  top: 15%;
+  left: 93%;
+  transform: translate(-50%, -50%);
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  background-color: black !important;
+  color: white !important;
+}
+
+.overlay-button:hover {
+  background-color: #f6f6f4 !important;
+  border: none;
+}
+
+.close {
+  background-color: #edf4f2 !important;
+  border-radius: 1rem !important;
+  color: black !important;
+  border: none !important;
+  padding: 0.5rem 1rem 0.5rem 1rem !important;
+}
+
+.save {
+  padding: 0.5rem 1rem 0.5rem 1rem !important;
+}
+
+.title-label {
+  text-align: left;
+}
+
+textarea {
+  border-radius: 1rem !important;
+}
+
+#modal-input {
+  margin-left: 0rem;
+  margin-right: -6rem;
+}
+.container {
+  margin-top: 0.5rem;
+}
+
+.price {
+  border-top-left-radius: 1rem !important;
+  border-bottom-left-radius: 1rem !important;
+}
+
+.euro {
+  border-top-right-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+  background-color: white !important;
+}
+
+.date {
+  border-radius: 1rem !important;
+}
