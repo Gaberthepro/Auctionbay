@@ -57,6 +57,12 @@ function ProfileSettings({ showProfile, onHideProfile }: any) {
       });
     if (status == 200) {
       onHideProfile();
+    } else {
+      axios.get("http://localhost:3000/user/" + user_id).then((response) => {
+        setEmail(response.data.email);
+        setName(response.data.name);
+        setSurname(response.data.surname);
+      });
     }
   };
 
