@@ -9,9 +9,13 @@ import Me from "../../services/me";
 import axios from "axios";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
+import S3 from "react-aws-s3-typescript";
 
 function AddAuctioon({ show, onHide }: any) {
-  const [Img, setImg] = useState("https://color-hex.org/colors/f6f6f4.png");
+  const [PreviewImg, setPreviewImg] = useState(
+    "https://color-hex.org/colors/f6f6f4.png"
+  );
+  const [ImgFile, setImgFile] = useState(null);
   const [Title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
   const [Starting_price, setStartingPrice] = useState(0.0);
@@ -46,17 +50,16 @@ function AddAuctioon({ show, onHide }: any) {
     const { files } = e.target;
     if (files && files.length) {
       const filename = files[0].name;
-
       var parts = filename.split(".");
       const fileType = parts[parts.length - 1];
-      console.log("fileType", fileType);
       if (fileType == "png" || fileType == "jpg" || fileType == "jpeg") {
         preview = await URL.createObjectURL(e.target.files[0]);
-        setImg(preview);
+        setPreviewImg(preview);
         setAddImgButton(true);
         setTrashButton(false);
+        setImgFile(files[0]);
       } else {
-        alert("this is not valid file(png, jpg, jpeg)");
+        notyf.error("this is not valid file(png, jpg, jpeg)");
       }
     }
   };
@@ -66,18 +69,36 @@ function AddAuctioon({ show, onHide }: any) {
   };
 
   const handleCancelImg = () => {
-    setImg("https://color-hex.org/colors/f6f6f4.png");
+    setPreviewImg("https://color-hex.org/colors/f6f6f4.png");
     setAddImgButton(false);
     setTrashButton(true);
   };
 
   const handleAddAuction = async () => {
+    let imageUrl = null;
+    const ReactS3Client = new S3({
+      accessKeyId: "AKIAYRUDS2PLK4KNBQ4Q",
+      secretAccessKey: "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",
+      bucketName: "skilup-mentor-auctionbay",
+      region: "eu-central-1",
+      s3Url: "https://skilup-mentor-auctionbay.s3.eu-central-1.amazonaws.com/"
+    });
+
+    if (ImgFile != null) {
+      try {
+        const data = await ReactS3Client.uploadFile(ImgFile);
+        imageUrl = data.location;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     const AuctionData = {
       title: Title,
       description: Description,
       starting_price: Starting_price,
       end_date: Date,
-      imgURl: "https://color-hex.org/colors/f6f6f4.png",
+      imgURl: imageUrl,
       userId: user_id
     };
 
@@ -94,7 +115,8 @@ function AddAuctioon({ show, onHide }: any) {
       setDescription("");
       setStartingPrice(0);
       setEndDate("");
-      setImg("https://color-hex.org/colors/f6f6f4.png");
+      setPreviewImg("https://color-hex.org/colors/f6f6f4.png");
+      setImgFile(null);
       onHide();
     }
   };
@@ -107,7 +129,7 @@ function AddAuctioon({ show, onHide }: any) {
         </Modal.Header>
         <Modal.Body className="modal-body">
           <div className="image-container">
-            <Image src={Img} fluid className="image" />
+            <Image src={PreviewImg} fluid className="image" />
             <input
               style={{ display: "none" }}
               ref={inputFile}
