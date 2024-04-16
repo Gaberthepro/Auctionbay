@@ -9,10 +9,10 @@ export function Home() {
   const [Surname, setSurname] = useState("");
   const token = localStorage.getItem("access_token");
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModalAddAuction, setShowModalAddAuction] = useState(false);
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  const handleShowModalAddAuction = () => setShowModalAddAuction(true);
+  const handleCloseModalAddAuctio = () => setShowModalAddAuction(false);
 
   useEffect(() => {
     Me(token)
@@ -27,11 +27,11 @@ export function Home() {
 
   return (
     <Fragment>
-      <Navbar onShowModal={handleShowModal} />
+      <Navbar onShowModal={handleShowModalAddAuction} />
       <h1>
         Hello {Name} {Surname}!
       </h1>
-      <AddAuctioon show={showModal} onHide={handleCloseModal}></AddAuctioon>
+      <AddAuctioon show={showModalAddAuction} onHide={handleCloseModalAddAuctio}></AddAuctioon>
     </Fragment>
   );
 }
