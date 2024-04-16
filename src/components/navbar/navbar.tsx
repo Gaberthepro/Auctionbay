@@ -8,7 +8,7 @@ import userData from "../../services/userData";
 
 
 
-export function Navbar({ onShowModalAddAuction }:any) {
+export function Navbar({ onShowModalAddAuction, onShowModalProfile }:any) {
   var isLoggedIn: boolean;
   var onLanding: boolean;
   var currentURL = window.location.href;
@@ -201,6 +201,7 @@ export function Navbar({ onShowModalAddAuction }:any) {
                       type="button"
                       className="btn btn-outline-light"
                       style={{ marginTop: "0.5rem" }}
+                      onClick={onShowModalProfile}
                     >
                       <span style={{ marginRight: "0.5rem" }}>
                         <FontAwesomeIcon icon={faGear} />

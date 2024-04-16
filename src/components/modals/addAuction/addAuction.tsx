@@ -1,11 +1,10 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Image from "react-bootstrap/Image";
 import "./addAuction.css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Me from "../../../services/me";
 import axios from "axios";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
@@ -22,8 +21,7 @@ function AddAuctioon({ show, onHide }: any) {
   const [Date, setEndDate] = useState("");
   const [addImgButton, setAddImgButton] = useState(false);
   const [Trash, setTrashButton] = useState(true);
-  const [user_id, setUserId] = useState();
-  const token = localStorage.getItem("access_token");
+  const user_id = localStorage.getItem("user_id");
   const inputFile: any = useRef(null);
   let preview;
   var Status: number;
@@ -35,16 +33,6 @@ function AddAuctioon({ show, onHide }: any) {
     },
     ripple: false
   });
-
-  useEffect(() => {
-    Me(token)
-      .then((response) => {
-        setUserId(response.data.id);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data:", error);
-      });
-  }, [token]);
 
   const handleFileUpload = async (e: any) => {
     const { files } = e.target;
@@ -222,7 +210,7 @@ function AddAuctioon({ show, onHide }: any) {
                 <input
                   type="datetime-local"
                   className="form-control date"
-                  placeholder="Title"
+                  placeholder="End date"
                   value={Date}
                   onChange={(e) => setEndDate(e.target.value)}
                 />

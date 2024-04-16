@@ -1,0 +1,21 @@
+#surname-settings {
+  border-radius: 1rem;
+}
+
+#modal-input-email {
+  margin-left: 0.7rem;
+  margin-right: -5rem;
+}
+
+.email-settings-label {
+  margin-left: 0.7rem;
+}
+
+.link-settings {
+  margin-left: 0.7rem;
+  margin-top: 0.5rem !important;
+}
+
+.link-settings-button {
+  margin-top: 0.5rem;
+}
