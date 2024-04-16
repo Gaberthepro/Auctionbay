@@ -3,7 +3,7 @@ import Navbar from "../../components/navbar/navbar";
 import { useEffect, useState } from "react";
 import Me from "../../services/me";
 import "bootstrap/dist/css/bootstrap.min.css";
-import AddAuctioon from "../../components/modals/addAuction";
+import AddAuctioon from "../../components/modals/addAuction/addAuction";
 export function Home() {
   const [Name, setName] = useState("");
   const [Surname, setSurname] = useState("");

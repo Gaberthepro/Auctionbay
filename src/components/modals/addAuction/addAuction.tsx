@@ -5,7 +5,7 @@ import Image from "react-bootstrap/Image";
 import "./addAuction.css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Me from "../../services/me";
+import Me from "../../../services/me";
 import axios from "axios";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
