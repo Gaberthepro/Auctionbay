@@ -7,7 +7,11 @@ import "notyf/notyf.min.css";
 import "./profileSettings.css";
 import userData from "../../../../services/userData";
 
-function ProfileSettings({ showProfile, onHideProfile }: any) {
+function ProfileSettings({
+  showProfile,
+  onHideProfile,
+  onShowModalChangePass
+}: any) {
   var status: number;
   const user_id = localStorage.getItem("user_id");
   const [Name, setName] = useState("");
@@ -64,6 +68,11 @@ function ProfileSettings({ showProfile, onHideProfile }: any) {
         setSurname(response.data.surname);
       });
     }
+  };
+
+  const handleChangePass = () => {
+    onShowModalChangePass();
+    onHideProfile();
   };
 
   return (
@@ -134,7 +143,11 @@ function ProfileSettings({ showProfile, onHideProfile }: any) {
             </div>
           </div>
           <div className="link-settings">
-            <Button className="link-settings-button" variant="link">
+            <Button
+              className="link-settings-button"
+              onClick={handleChangePass}
+              variant="link"
+            >
               Change password
             </Button>
           </div>

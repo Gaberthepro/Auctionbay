@@ -5,6 +5,8 @@ import Me from "../../services/me";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddAuctioon from "../../components/modals/addAuction/addAuction";
 import ProfileSettings from "../../components/modals/profile/profile-settings/profileSettings";
+import ChangePass from "../../components/modals/profile/change-password/changePassword";
+
 export function Home() {
   const [Name, setName] = useState("");
   const [Surname, setSurname] = useState("");
@@ -21,6 +23,10 @@ export function Home() {
   };
   const handleCloseModalProfileSettings = () =>
     setShowModalProfileSettings(false);
+
+  const [showModalChangePass, setShowModalChangePass] = useState(false);
+  const handleShowModalChangePass = () => setShowModalChangePass(true);
+  const handleCloseModalChangePass = () => setShowModalChangePass(false);
 
   useEffect(() => {
     Me(token)
@@ -50,7 +56,12 @@ export function Home() {
       <ProfileSettings
         showProfile={showModalProfileSettings}
         onHideProfile={handleCloseModalProfileSettings}
+        onShowModalChangePass={handleShowModalChangePass}
       ></ProfileSettings>
+      <ChangePass
+        showChangePass={showModalChangePass}
+        onHideChangePass={handleCloseModalChangePass}
+      ></ChangePass>
     </Fragment>
   );
 }
