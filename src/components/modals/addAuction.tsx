@@ -7,6 +7,8 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Me from "../../services/me";
 import axios from "axios";
+import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 
 function AddAuctioon({ show, onHide }: any) {
   const [Img, setImg] = useState("https://color-hex.org/colors/f6f6f4.png");
@@ -21,6 +23,14 @@ function AddAuctioon({ show, onHide }: any) {
   const inputFile: any = useRef(null);
   let preview;
   var Status: number;
+  const notyf = new Notyf({
+    duration: 3000,
+    position: {
+      x: "center",
+      y: "top"
+    },
+    ripple: false
+  });
 
   useEffect(() => {
     Me(token)
@@ -75,11 +85,11 @@ function AddAuctioon({ show, onHide }: any) {
       .post("http://localhost:3000/me/auction/", AuctionData)
       .then((response) => (Status = response.status))
       .catch((error) => {
-        alert(error.response.data.message[0]);
+        notyf.error(error.response.data.message[0]);
       });
 
     if (Status == 201) {
-      alert("auction succesfuly added");
+      notyf.success("Auction succesfuly added");
       setTitle("");
       setDescription("");
       setStartingPrice(0);
