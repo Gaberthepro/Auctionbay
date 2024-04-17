@@ -94,10 +94,11 @@ function ChangePass({ showChangePass, onHideChangePass }: any) {
       }
     }
   };
+  
 
   return (
     <Fragment>
-      <Modal show={showChangePass} onHide={showChangePass}>
+      <Modal show={showChangePass} onHide={onHideChangePass}>
         <Modal.Header>
           <Modal.Title>Change password</Modal.Title>
         </Modal.Header>

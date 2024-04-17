@@ -82,10 +82,8 @@ function register() {
           navigate("/Home");
         }, 1000);
       } else {
-        //window.location.reload();
         setMessageContainerClass("message-container--error");
-        setMessageContainerContent(errorMessage);
-        console.log(errorMessage);
+        setMessageContainerContent(errorMessage[0]);
       }
     }
   };

@@ -5,3 +5,11 @@
 .addButton {
   border: 1px solid black !important;
 }
+
+.avatar_change_profile {
+  border-radius: 50% !important;
+  width: 4.5rem !important;
+  height: 4.5rem !important;
+  margin-bottom: 0.625rem;
+  object-fit: cover;
+}

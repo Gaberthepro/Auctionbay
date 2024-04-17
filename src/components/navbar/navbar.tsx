@@ -3,8 +3,6 @@ import "./navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import Me from "../../services/me";
-import userData from "../../services/userData";
 import UserLocalStored from "../../services/localStoredData";
 
 export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
