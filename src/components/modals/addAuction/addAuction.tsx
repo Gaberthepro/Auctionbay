@@ -23,7 +23,7 @@ function AddAuctioon({ show, onHide }: any) {
   const [Trash, setTrashButton] = useState(true);
   const user_id = localStorage.getItem("user_id");
   const inputFile: any = useRef(null);
-  let preview;
+  let preview: any;
   var Status: number;
   const notyf = new Notyf({
     duration: 3000,
@@ -63,6 +63,7 @@ function AddAuctioon({ show, onHide }: any) {
   };
 
   const handleAddAuction = async () => {
+    //AWS S3 shranjevanje
     let imageUrl = null;
     const ReactS3Client = new S3({
       accessKeyId: "AKIAYRUDS2PLK4KNBQ4Q",
@@ -79,6 +80,18 @@ function AddAuctioon({ show, onHide }: any) {
       } catch (err) {
         console.log(err);
       }
+    }
+
+    if (PreviewImg == "https://color-hex.org/colors/f6f6f4.png") {
+      notyf.error("Pleas provide img");
+      setTitle("");
+      setDescription("");
+      setStartingPrice(0);
+      setEndDate("");
+      setPreviewImg("https://color-hex.org/colors/f6f6f4.png");
+      setImgFile(null);
+      onHide();
+      return;
     }
 
     const AuctionData = {

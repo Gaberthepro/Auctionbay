@@ -1,7 +1,24 @@
 import { Fragment } from "react/jsx-runtime";
 import "./auction-card.css";
+import { useState } from "react";
+import axios from "axios";
 
-export function Card() {
+export function Card(auction_id: number) {
+  const [img, setImg] = useState("");
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+
+  axios
+    .get("http://localhost:3000/auctions/one/48")
+    .then((response) => {
+      setImg(response.data.imgURl);
+      setTitle(response.data.title);
+      setPrice(response.data.starting_price);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
   return (
     <Fragment>
       <div className="card">
@@ -14,14 +31,10 @@ export function Card() {
               <span className="badge rounded-pill text-bg-danger">24h</span>
             </div>
           </div>
-          <h4 className="card-title">Old chair</h4>
-          <h4 className="card-text">65 €</h4>
+          <h4 className="card-title">{title}</h4>
+          <h4 className="card-text">{price} €</h4>
         </div>
-        <img
-          src="https://www.deltachildren.com/cdn/shop/products/y8sklpkrls44udnvnrpd.jpg?v=1614635808"
-          className="img-card"
-          alt="..."
-        />
+        <img src={img} className="img-card" alt="..." />
       </div>
     </Fragment>
   );

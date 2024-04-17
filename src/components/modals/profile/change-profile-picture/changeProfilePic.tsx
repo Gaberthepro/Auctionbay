@@ -46,6 +46,7 @@ function ChangeProfilePic({ showChangePic, onHideChangePic }: any) {
   };
 
   const handleChangeProfilePic = async () => {
+    //AWS s3 shranjevanje
     let imageUrl = null;
     const ReactS3Client = new S3({
       accessKeyId: "AKIAYRUDS2PLK4KNBQ4Q",
