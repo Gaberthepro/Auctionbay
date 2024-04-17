@@ -4,11 +4,22 @@ import "./login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Me from "../../services/me";
+import SaveDataToLocal from "../../services/saveDataToLocal";
+import { Notyf } from "notyf";
 
 function Login() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   var Status: number;
+  const notyf = new Notyf({
+    duration: 3000,
+    position: {
+      x: "center",
+      y: "top"
+    },
+    ripple: false
+  });
   const navigate = useNavigate();
 
   const handleLogin = async (event: any) => {
@@ -28,7 +39,14 @@ function Login() {
       .catch((error) => (Status = error.response.data.statusCode));
 
     if (Status != 401) {
-      navigate("/Home");
+      setTimeout(async () => {
+        const token = localStorage.getItem("access_token");
+        const data = await Me(token);
+        const user_id = (await data).data.id;
+        await SaveDataToLocal(user_id);
+        notyf.success("Welcome back");
+        navigate("/Home");
+      }, 200);
     } else {
       Swal.fire({
         icon: "error",

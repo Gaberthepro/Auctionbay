@@ -3,48 +3,16 @@ import "./navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import Me from "../../services/me";
-import userData from "../../services/userData";
+import UserLocalStored from "../../services/localStoredData";
 
-
-
-export function Navbar({ onShowModalAddAuction, onShowModalProfile }:any) {
+export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
   var isLoggedIn: boolean;
   var onLanding: boolean;
   var currentURL = window.location.href;
   var parts = currentURL.split("/");
   var endpoint = parts[parts.length - 1];
-  const token = localStorage.getItem("access_token");
-  const [user_id, setUserID] = useState();
-  const [img, setImage] = useState(
-    "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"
-  );
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
-  useEffect(() => {
-    Me(token)
-      .then((response) => {
-        setUserID(response.data.id);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data:", error);
-      });
-  }, [token]);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (!user_id) {
-        return;
-      }
-      try {
-        const response = await userData(user_id);
-        setImage(response.data.imgURl);
-      } catch (error) {
-        console.error("There was an error fetching the data:", error);
-      }
-    };
-    fetchUserData();
-  }, [user_id]);
+  const user_data = UserLocalStored();
 
   if (localStorage.getItem("access_token") === null) {
     isLoggedIn = false;
@@ -184,7 +152,7 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }:any) {
                     </div>
                     <div className="col">
                       <img
-                        src={img}
+                        src={user_data.imgURl}
                         alt="Avatar"
                         className="avatar dropdown-toggle"
                         onClick={toggleDropdown}

@@ -69,7 +69,7 @@ function AddAuctioon({ show, onHide }: any) {
       secretAccessKey: "VT67B2TCFPUSWK64VHvR72hLTpgtcltMk1keNchL",
       bucketName: "skilup-mentor-auctionbay",
       region: "eu-central-1",
-      s3Url: "https://skilup-mentor-auctionbay.s3.eu-central-1.amazonaws.com/"
+      s3Url: "https://skilup-mentor-auctionbay.s3.eu-central-1.amazonaws.com"
     });
 
     if (ImgFile != null) {
