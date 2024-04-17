@@ -14,6 +14,21 @@
   text-align: right;
 }
 
+#clock-badge {
+  color: #071015 !important;
+  background-color: #ffaa98 !important;
+}
+
+#clock-badge-less-24 {
+  color: #071015 !important;
+  background-color: white !important;
+}
+
+#done {
+  background-color: black !important;
+  border-radius: 1rem !important;
+}
+
 .row {
   margin: 10px;
 }

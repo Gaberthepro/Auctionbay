@@ -2,13 +2,12 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Register from "./pages/Register/register";
 import Login from "./pages/Login/login";
-import Card from "./components/auciton-card/auction-card";
 import Landing from "./pages/Landing/landing";
 import Home from "./pages/Home/home";
 import PrivateRoutes from "./utils/PrivateRoutes";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-toastify/dist/ReactToastify.css';
-import 'react-toastify/dist/ReactToastify.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
   const currentTime = new Date().getTime();
@@ -30,7 +29,6 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/Home" element={<Home />} />
         </Route>
-        <Route path="/card" element={<Card />} />
       </Routes>
     </BrowserRouter>
   );

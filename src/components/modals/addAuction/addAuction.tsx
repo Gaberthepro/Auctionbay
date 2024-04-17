@@ -118,6 +118,8 @@ function AddAuctioon({ show, onHide }: any) {
       setEndDate("");
       setPreviewImg("https://color-hex.org/colors/f6f6f4.png");
       setImgFile(null);
+      setTrashButton(true);
+      setAddImgButton(false);
       onHide();
     }
   };
