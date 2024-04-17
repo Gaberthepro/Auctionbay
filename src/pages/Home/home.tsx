@@ -6,11 +6,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AddAuctioon from "../../components/modals/addAuction/addAuction";
 import ProfileSettings from "../../components/modals/profile/profile-settings/profileSettings";
 import ChangePass from "../../components/modals/profile/change-password/changePassword";
+import ChangeProfilePic from "../../components/modals/profile/change-profile-picture/changeProfilePic";
+import UserLocalStored from "../../services/localStoredData";
 
 export function Home() {
-  const [Name, setName] = useState("");
-  const [Surname, setSurname] = useState("");
   const token = localStorage.getItem("access_token");
+  const user_id = localStorage.getItem("user_id");
+  const user_data = UserLocalStored();
 
   const [showModalAddAuction, setShowModalAddAuction] = useState(false);
   const handleShowModalAddAuction = () => setShowModalAddAuction(true);
@@ -28,11 +30,13 @@ export function Home() {
   const handleShowModalChangePass = () => setShowModalChangePass(true);
   const handleCloseModalChangePass = () => setShowModalChangePass(false);
 
+  const [showModalChangePic, setShowModalChangePic] = useState(false);
+  const handleShowModalChangePic = () => setShowModalChangePic(true);
+  const handleCloseModalChangePic = () => setShowModalChangePic(false);
+
   useEffect(() => {
     Me(token)
       .then((response) => {
-        setName(response.data.name);
-        setSurname(response.data.surname);
         localStorage.setItem("user_id", response.data.id);
       })
       .catch((error) => {
@@ -47,7 +51,7 @@ export function Home() {
         onShowModalProfile={handleShowModalProfileSettings}
       />
       <h1>
-        Hello {Name} {Surname}!
+        Hello {user_data.name} {user_data.surname}!
       </h1>
       <AddAuctioon
         show={showModalAddAuction}
@@ -57,11 +61,16 @@ export function Home() {
         showProfile={showModalProfileSettings}
         onHideProfile={handleCloseModalProfileSettings}
         onShowModalChangePass={handleShowModalChangePass}
+        onShowModalChangePic={handleShowModalChangePic}
       ></ProfileSettings>
       <ChangePass
         showChangePass={showModalChangePass}
         onHideChangePass={handleCloseModalChangePass}
       ></ChangePass>
+      <ChangeProfilePic
+        showChangePic={showModalChangePic}
+        onHideChangePic={handleCloseModalChangePic}
+      ></ChangeProfilePic>
     </Fragment>
   );
 }

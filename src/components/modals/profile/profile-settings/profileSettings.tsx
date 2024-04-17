@@ -6,11 +6,13 @@ import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 import "./profileSettings.css";
 import userData from "../../../../services/userData";
+import SaveDataToLocal from "../../../../services/saveDataToLocal";
 
 function ProfileSettings({
   showProfile,
   onHideProfile,
-  onShowModalChangePass
+  onShowModalChangePass,
+  onShowModalChangePic
 }: any) {
   var status: number;
   const user_id = localStorage.getItem("user_id");
@@ -54,13 +56,16 @@ function ProfileSettings({
       .patch("http://localhost:3000/user/" + user_id, UpdateData)
       .then((response) => {
         status = response.status;
-        notyf.success("User successfully updated");
       })
       .catch((error) => {
         notyf.error(error.response.data.message);
       });
     if (status == 200) {
-      onHideProfile();
+      SaveDataToLocal(user_id);
+      notyf.success("User successfully updated");
+      setTimeout(() => {
+        onHideProfile();
+      }, 500);
     } else {
       axios.get("http://localhost:3000/user/" + user_id).then((response) => {
         setEmail(response.data.email);
@@ -72,6 +77,11 @@ function ProfileSettings({
 
   const handleChangePass = () => {
     onShowModalChangePass();
+    onHideProfile();
+  };
+
+  const handleChagePic = () => {
+    onShowModalChangePic();
     onHideProfile();
   };
 
@@ -152,7 +162,11 @@ function ProfileSettings({
             </Button>
           </div>
           <div className="link-settings">
-            <Button className="link-settings-button" variant="link">
+            <Button
+              className="link-settings-button"
+              variant="link"
+              onClick={handleChagePic}
+            >
               Change profile picture
             </Button>
           </div>

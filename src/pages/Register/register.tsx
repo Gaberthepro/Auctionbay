@@ -4,6 +4,8 @@ import "./register.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import SaveDataToLocal from "../../services/saveDataToLocal";
+import Me from "../../services/me";
 
 function register() {
   const [Name, setName] = useState("");
@@ -72,7 +74,11 @@ function register() {
           timer: 1000,
           showConfirmButton: false
         });
-        setTimeout(() => {
+        setTimeout(async () => {
+          const token = localStorage.getItem("access_token");
+          const data = await Me(token);
+          const user_id = (await data).data.id;
+          await SaveDataToLocal(user_id);
           navigate("/Home");
         }, 1000);
       } else {

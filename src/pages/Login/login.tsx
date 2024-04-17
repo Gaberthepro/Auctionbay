@@ -4,6 +4,8 @@ import "./login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Me from "../../services/me";
+import SaveDataToLocal from "../../services/saveDataToLocal";
 
 function Login() {
   const [Email, setEmail] = useState("");
@@ -28,7 +30,13 @@ function Login() {
       .catch((error) => (Status = error.response.data.statusCode));
 
     if (Status != 401) {
-      navigate("/Home");
+      setTimeout(async () => {
+        const token = localStorage.getItem("access_token");
+        const data = await Me(token);
+        const user_id = (await data).data.id;
+        await SaveDataToLocal(user_id);
+        navigate("/Home");
+      }, 200);
     } else {
       Swal.fire({
         icon: "error",
