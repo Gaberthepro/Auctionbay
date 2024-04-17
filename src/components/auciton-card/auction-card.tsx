@@ -19,7 +19,7 @@ export function Card() {
         </div>
         <img
           src="https://www.deltachildren.com/cdn/shop/products/y8sklpkrls44udnvnrpd.jpg?v=1614635808"
-          className="img"
+          className="img-card"
           alt="..."
         />
       </div>
