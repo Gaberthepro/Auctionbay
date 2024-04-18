@@ -188,7 +188,7 @@ function AddAuctioon({ show, onHide }: any) {
                     type="number"
                     className="form-control price"
                     min={0}
-                    step=".1"
+                    step=".01"
                     placeholder="Starting price"
                     value={Starting_price}
                     onChange={(e) =>

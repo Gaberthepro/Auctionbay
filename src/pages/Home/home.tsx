@@ -8,11 +8,13 @@ import ProfileSettings from "../../components/modals/profile/profile-settings/pr
 import ChangePass from "../../components/modals/profile/change-password/changePassword";
 import ChangeProfilePic from "../../components/modals/profile/change-profile-picture/changeProfilePic";
 import UserLocalStored from "../../services/localStoredData";
+import Auctions from "../Auctions/auctions";
 
 export function Home() {
   const token = localStorage.getItem("access_token");
   const user_id = localStorage.getItem("user_id");
   const user_data = UserLocalStored();
+  var onProfile: boolean = true;
 
   const [showModalAddAuction, setShowModalAddAuction] = useState(false);
   const handleShowModalAddAuction = () => setShowModalAddAuction(true);
@@ -44,15 +46,28 @@ export function Home() {
       });
   }, [token]);
 
+  var currentURL = window.location.href;
+
+  if (currentURL.toLowerCase().includes("home")) {
+    onProfile = true;
+  } else {
+    onProfile = false;
+  }
+
   return (
     <Fragment>
       <Navbar
         onShowModalAddAuction={handleShowModalAddAuction}
         onShowModalProfile={handleShowModalProfileSettings}
       />
-      <h1>
-        Hello {user_data.name} {user_data.surname}!
-      </h1>
+      {onProfile ? (
+        <h1>
+          Hello {user_data.name} {user_data.surname}!
+        </h1>
+      ) : (
+          <Auctions></Auctions>
+      )}
+
       <AddAuctioon
         show={showModalAddAuction}
         onHide={handleCloseModalAddAuctio}
