@@ -1,1 +1,10 @@
+.button-group-profile {
+  text-align: center !important;
+}
+
+.group {
+  background-color: #edf4f2 !important;
+  padding: 1rem;
+  gap: 0.5rem !important;
+}
 

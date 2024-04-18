@@ -9,11 +9,19 @@ import ChangePass from "../../components/modals/profile/change-password/changePa
 import ChangeProfilePic from "../../components/modals/profile/change-profile-picture/changeProfilePic";
 import UserLocalStored from "../../services/localStoredData";
 import Auctions from "../Auctions/auctions";
+import { Button, ButtonGroup } from "react-bootstrap";
+import "./home.css";
+import { useNavigate } from "react-router-dom";
+
 export function Home() {
   const token = localStorage.getItem("access_token");
   const user_id = localStorage.getItem("user_id");
   const user_data = UserLocalStored();
   var onProfile: boolean = true;
+  const navigate = useNavigate();
+  const [button1, setbutton1] = useState("dark");
+  const [button2, setbutton2] = useState("link");
+  const [button3, setbutton3] = useState("link");
 
   const [showModalAddAuction, setShowModalAddAuction] = useState(false);
   const handleShowModalAddAuction = () => setShowModalAddAuction(true);
@@ -53,6 +61,34 @@ export function Home() {
     onProfile = false;
   }
 
+  if (currentURL.toLowerCase().includes("home")) {
+    onProfile = true;
+  } else {
+    onProfile = false;
+  }
+
+  const handleMyauctions = () => {
+    setbutton1("dark");
+    setbutton2("link");
+    setbutton3("link");
+    navigate("/Home")
+  };
+
+  const handleBidding = () => {
+    setbutton1("link");
+    setbutton2("dark");
+    setbutton3("link");
+    navigate("/Home/Bidding");
+  };
+
+  const handleWon = () => {
+    setbutton1("link");
+    setbutton2("link");
+    setbutton3("dark");
+    navigate("/Home/Won");
+  };
+
+
   return (
     <Fragment>
       <Navbar
@@ -60,11 +96,26 @@ export function Home() {
         onShowModalProfile={handleShowModalProfileSettings}
       />
       {onProfile ? (
-        <h1>
-          Hello {user_data.name} {user_data.surname}!
-        </h1>
+        <>
+          <h1>
+            Hello {user_data.name} {user_data.surname}!
+          </h1>
+          <div className="button-group-profile">
+            <ButtonGroup className="group" aria-label="Basic example">
+              <Button variant={button1} onClick={handleMyauctions}>
+                My auctions
+              </Button>
+              <Button variant={button2} onClick={handleBidding}>
+                Bidding
+              </Button>
+              <Button variant={button3} onClick={handleWon}>
+                Won
+              </Button>
+            </ButtonGroup>
+          </div>
+        </>
       ) : (
-          <Auctions></Auctions>
+        <Auctions></Auctions>
       )}
       <AddAuctioon
         show={showModalAddAuction}
