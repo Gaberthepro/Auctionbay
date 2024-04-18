@@ -1,10 +1,8 @@
 import { Fragment } from "react/jsx-runtime";
 import "./auction-card.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
-
+import { faClock, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Button, ButtonGroup } from "react-bootstrap";
 
 export interface Auction {
   id: number;
@@ -13,6 +11,9 @@ export interface Auction {
   starting_price: number;
   end_date: Date;
   imgURl: string;
+  user: {
+    id: number;
+  };
 }
 
 interface AuctionCardProps {
@@ -22,12 +23,12 @@ interface AuctionCardProps {
 const Card: React.FC<AuctionCardProps> = ({ auction }) => {
   var over24h: boolean;
   var isDone: boolean;
+  const user_id = localStorage.getItem("user_id");
+  var myAuction = false;
 
   const targetDate: any = new Date(auction.end_date);
   const now: any = new Date();
   const diffInHours = Math.round((targetDate - now) / 1000 / 60 / 60);
-
-
 
   if (diffInHours > 24) {
     over24h = true;
@@ -39,6 +40,15 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
     isDone = true;
   } else {
     isDone = false;
+  }
+
+  if (
+    user_id &&
+    auction?.user?.id &&
+    parseInt(user_id) === auction.user.id &&
+    diffInHours > 0
+  ) {
+    myAuction = true;
   }
 
   return (
@@ -83,6 +93,18 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
           <h4 className="card-text">{auction.starting_price} €</h4>
         </div>
         <img src={auction.imgURl} className="img-card" alt="..." />
+        {myAuction ? (
+          <ButtonGroup className="edit-button-group">
+            <Button className="delete" variant="outline-dark">
+              <FontAwesomeIcon icon={faTrash} />
+            </Button>
+            <Button variant="dark" className="edit-button">
+              Edit
+            </Button>
+          </ButtonGroup>
+        ) : (
+          <></>
+        )}
       </div>
     </Fragment>
   );

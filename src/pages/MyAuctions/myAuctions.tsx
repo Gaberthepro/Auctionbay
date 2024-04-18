@@ -21,7 +21,10 @@ export function MyAuctions() {
 
   return (
     <Fragment>
-      <div className="cards-grid-container" style={{ marginTop: "1rem" }}>
+      <div
+        className="cards-grid-container"
+        style={{ marginTop: "1rem", marginLeft: "1rem" }}
+      >
         {myAuctions.map((auction) => (
           <Card key={auction.id} auction={auction} />
         ))}
