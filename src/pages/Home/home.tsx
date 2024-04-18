@@ -12,16 +12,21 @@ import Auctions from "../Auctions/auctions";
 import { Button, ButtonGroup } from "react-bootstrap";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
+import MyAuctions from "../MyAuctions/myAuctions";
+import Bidding from "../Bidding/bidding";
+import Won from "../Won/won";
 
 export function Home() {
   const token = localStorage.getItem("access_token");
   const user_id = localStorage.getItem("user_id");
   const user_data = UserLocalStored();
+
   var onProfile: boolean = true;
   const navigate = useNavigate();
   const [button1, setbutton1] = useState("dark");
   const [button2, setbutton2] = useState("link");
   const [button3, setbutton3] = useState("link");
+  const [page, setPage] = useState("");
 
   const [showModalAddAuction, setShowModalAddAuction] = useState(false);
   const handleShowModalAddAuction = () => setShowModalAddAuction(true);
@@ -71,7 +76,8 @@ export function Home() {
     setbutton1("dark");
     setbutton2("link");
     setbutton3("link");
-    navigate("/Home")
+    navigate("/Home");
+    setPage("");
   };
 
   const handleBidding = () => {
@@ -79,6 +85,7 @@ export function Home() {
     setbutton2("dark");
     setbutton3("link");
     navigate("/Home/Bidding");
+    setPage("Bidding");
   };
 
   const handleWon = () => {
@@ -86,8 +93,8 @@ export function Home() {
     setbutton2("link");
     setbutton3("dark");
     navigate("/Home/Won");
+    setPage("Won");
   };
-
 
   return (
     <Fragment>
@@ -102,17 +109,26 @@ export function Home() {
           </h1>
           <div className="button-group-profile">
             <ButtonGroup className="group" aria-label="Basic example">
-              <Button variant={button1} onClick={handleMyauctions}>
+              <Button className="btn-group-home" variant={button1} onClick={handleMyauctions}>
                 My auctions
               </Button>
-              <Button variant={button2} onClick={handleBidding}>
+              <Button className="btn-group-home" variant={button2} onClick={handleBidding}>
                 Bidding
               </Button>
-              <Button variant={button3} onClick={handleWon}>
+              <Button className="btn-group-home" variant={button3} onClick={handleWon}>
                 Won
               </Button>
             </ButtonGroup>
           </div>
+          {page === null ? (
+            <MyAuctions />
+          ) : page === "Bidding" ? (
+            <Bidding />
+          ) : page === "Won" ? (
+            <Won />
+          ) : (
+            <MyAuctions />
+          )}
         </>
       ) : (
         <Auctions></Auctions>
