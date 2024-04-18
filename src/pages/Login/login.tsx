@@ -13,7 +13,7 @@ function Login() {
   const [Password, setPassword] = useState("");
   var Status: number;
   const notyf = new Notyf({
-    duration: 3000,
+    duration: 2000,
     position: {
       x: "center",
       y: "top"
