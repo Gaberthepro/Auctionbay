@@ -1,7 +1,6 @@
 import { Fragment } from "react/jsx-runtime";
 import Navbar from "../../components/navbar/navbar";
 import { useEffect, useState } from "react";
-import Me from "../../services/me";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddAuctioon from "../../components/modals/addAuction/addAuction";
 import ProfileSettings from "../../components/modals/profile/profile-settings/profileSettings";
@@ -20,7 +19,7 @@ export function Home() {
   const token = localStorage.getItem("access_token");
   const user_id = localStorage.getItem("user_id");
   const user_data = UserLocalStored();
-
+  var currentURL = window.location.href;
   var onProfile: boolean = true;
   const navigate = useNavigate();
   const [button1, setbutton1] = useState("dark");
@@ -47,18 +46,6 @@ export function Home() {
   const [showModalChangePic, setShowModalChangePic] = useState(false);
   const handleShowModalChangePic = () => setShowModalChangePic(true);
   const handleCloseModalChangePic = () => setShowModalChangePic(false);
-
-  useEffect(() => {
-    Me(token)
-      .then((response) => {
-        localStorage.setItem("user_id", response.data.id);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data:", error);
-      });
-  }, [token]);
-
-  var currentURL = window.location.href;
 
   if (currentURL.toLowerCase().includes("home")) {
     onProfile = true;
@@ -109,13 +96,25 @@ export function Home() {
           </h1>
           <div className="button-group-profile">
             <ButtonGroup className="group" aria-label="Basic example">
-              <Button className="btn-group-home" variant={button1} onClick={handleMyauctions}>
+              <Button
+                className="btn-group-home"
+                variant={button1}
+                onClick={handleMyauctions}
+              >
                 My auctions
               </Button>
-              <Button className="btn-group-home" variant={button2} onClick={handleBidding}>
+              <Button
+                className="btn-group-home"
+                variant={button2}
+                onClick={handleBidding}
+              >
                 Bidding
               </Button>
-              <Button className="btn-group-home" variant={button3} onClick={handleWon}>
+              <Button
+                className="btn-group-home"
+                variant={button3}
+                onClick={handleWon}
+              >
                 Won
               </Button>
             </ButtonGroup>
