@@ -1,6 +1,6 @@
 import { Fragment } from "react/jsx-runtime";
 import Navbar from "../../components/navbar/navbar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddAuctioon from "../../components/modals/addAuction/addAuction";
 import ProfileSettings from "../../components/modals/profile/profile-settings/profileSettings";
