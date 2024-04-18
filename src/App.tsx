@@ -29,6 +29,8 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/Home" element={<Home />} />
           <Route path="/Auctions" element={<Home />} />
+          <Route path="/Home/Bidding" element={<Home />} />
+          <Route path="/Home/Won" element={<Home />} />
         </Route>
       </Routes>
     </BrowserRouter>
