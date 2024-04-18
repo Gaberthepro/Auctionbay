@@ -1,0 +1,10 @@
+.cards-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: 0rem;
+  justify-content: center;
+}
+
+.auction-body {
+  margin-left: 1rem;
+}

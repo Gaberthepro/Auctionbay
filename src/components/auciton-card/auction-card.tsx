@@ -5,34 +5,31 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 
-export function Card() {
-  var auction_id = 52;
-  const [img, setImg] = useState("");
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [end_date, setDate] = useState("");
+
+export interface Auction {
+  id: number;
+  title: string;
+  description: string;
+  starting_price: number;
+  end_date: Date;
+  imgURl: string;
+}
+
+interface AuctionCardProps {
+  auction: Auction;
+}
+
+const Card: React.FC<AuctionCardProps> = ({ auction }) => {
   var over24h: boolean;
   var isDone: boolean;
 
-  const targetDate: any = new Date(end_date);
+  const targetDate: any = new Date(auction.end_date);
   const now: any = new Date();
   const diffInHours = Math.round((targetDate - now) / 1000 / 60 / 60);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/auctions/one/" + auction_id)
-      .then((response) => {
-        setImg(response.data.imgURl);
-        setTitle(response.data.title);
-        setPrice(response.data.starting_price);
-        setDate(response.data.end_date);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [auction_id]);
 
-  if (diffInHours < 24) {
+
+  if (diffInHours > 24) {
     over24h = true;
   } else {
     over24h = false;
@@ -51,7 +48,9 @@ export function Card() {
           {isDone ? (
             <div className="row">
               <div className="col" id="left-badge">
-                <span id="done" className="badge badge-pill badge-dark">Done</span>
+                <span id="done" className="badge badge-pill badge-dark">
+                  Done
+                </span>
               </div>
             </div>
           ) : (
@@ -80,14 +79,13 @@ export function Card() {
               </div>
             </div>
           )}
-
-          <h4 className="card-title">{title}</h4>
-          <h4 className="card-text">{price} €</h4>
+          <h4 className="card-title">{auction.title}</h4>
+          <h4 className="card-text">{auction.starting_price} €</h4>
         </div>
-        <img src={img} className="img-card" alt="..." />
+        <img src={auction.imgURl} className="img-card" alt="..." />
       </div>
     </Fragment>
   );
-}
+};
 
 export default Card;

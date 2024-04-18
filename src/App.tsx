@@ -28,6 +28,7 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route element={<PrivateRoutes />}>
           <Route path="/Home" element={<Home />} />
+          <Route path="/Auctions" element={<Home />} />
         </Route>
       </Routes>
     </BrowserRouter>

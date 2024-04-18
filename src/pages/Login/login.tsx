@@ -36,7 +36,10 @@ function Login() {
         localStorage.setItem("access_token", response.data.access_token);
         localStorage.setItem("setupTime", JSON.stringify(now));
       })
-      .catch((error) => (Status = error.response.data.statusCode));
+      .catch((error) => {
+        Status = error.response.data.statusCode;
+        notyf.error("Unauthorized");
+      });
 
     if (Status != 401) {
       setTimeout(async () => {

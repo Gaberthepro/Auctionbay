@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import UserLocalStored from "../../services/localStoredData";
+import { useNavigate } from "react-router-dom";
+import Logo from "../../assets/images/logo.png";
 
 export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
   var isLoggedIn: boolean;
@@ -13,6 +15,7 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
   var endpoint = parts[parts.length - 1];
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const user_data = UserLocalStored();
+  const navigate = useNavigate();
 
   if (localStorage.getItem("access_token") === null) {
     isLoggedIn = false;
@@ -50,6 +53,14 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
     window.location.assign("/");
   };
 
+  const handleToAuctioon = () => {
+    navigate("/Auctions");
+  };
+
+  const handleToProfile = () => {
+    navigate("/Home");
+  };
+
   return (
     <Fragment>
       {onLanding ? (
@@ -58,11 +69,7 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
             <div className="collapse navbar-collapse" id="navbarText">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <img
-                    src="src/assets/images/logo.png"
-                    alt="Avatar"
-                    className="avatar-logo"
-                  />
+                  <img src={Logo} alt="Avatar" className="avatar-logo" />
                 </li>
               </ul>
               {isLoggedIn ? (
@@ -107,6 +114,7 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
               name="btnradio"
               id="btnradio1"
               autoComplete="off"
+              onClick={handleToAuctioon}
             />
             <label className="btn btn-outline-dark" htmlFor="btnradio1">
               Auctions
@@ -119,6 +127,7 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
               id="btnradio2"
               autoComplete="off"
               defaultChecked
+              onClick={handleToProfile}
             />
             <label className="btn btn-outline-dark" htmlFor="btnradio2">
               Profile
