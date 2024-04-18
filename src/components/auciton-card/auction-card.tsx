@@ -5,6 +5,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 
+
 export interface Auction {
   id: number;
   title: string;
@@ -78,7 +79,6 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
               </div>
             </div>
           )}
-
           <h4 className="card-title">{auction.title}</h4>
           <h4 className="card-text">{auction.starting_price} €</h4>
         </div>

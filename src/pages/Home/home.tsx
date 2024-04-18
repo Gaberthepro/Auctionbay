@@ -9,7 +9,6 @@ import ChangePass from "../../components/modals/profile/change-password/changePa
 import ChangeProfilePic from "../../components/modals/profile/change-profile-picture/changeProfilePic";
 import UserLocalStored from "../../services/localStoredData";
 import Auctions from "../Auctions/auctions";
-
 export function Home() {
   const token = localStorage.getItem("access_token");
   const user_id = localStorage.getItem("user_id");
@@ -67,7 +66,6 @@ export function Home() {
       ) : (
           <Auctions></Auctions>
       )}
-
       <AddAuctioon
         show={showModalAddAuction}
         onHide={handleCloseModalAddAuctio}
