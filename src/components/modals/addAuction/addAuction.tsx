@@ -121,6 +121,7 @@ function AddAuctioon({ show, onHide }: any) {
       setTrashButton(true);
       setAddImgButton(false);
       onHide();
+      location.reload();
     }
   };
 

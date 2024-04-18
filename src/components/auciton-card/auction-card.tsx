@@ -3,6 +3,8 @@ import "./auction-card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Button, ButtonGroup } from "react-bootstrap";
+import { Notyf } from "notyf";
+import axios from "axios";
 
 export interface Auction {
   id: number;
@@ -25,6 +27,14 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
   var isDone: boolean;
   const user_id = localStorage.getItem("user_id");
   var myAuction = false;
+  const notyf = new Notyf({
+    duration: 1000,
+    position: {
+      x: "center",
+      y: "top"
+    },
+    ripple: false
+  });
 
   const targetDate: any = new Date(auction.end_date);
   const now: any = new Date();
@@ -50,6 +60,19 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
   ) {
     myAuction = true;
   }
+
+  const handleDelete = () => {
+    axios
+      .delete("http://localhost:3000/auctions/" + auction.id)
+      .then(() => {
+        notyf.success("Auction was succesfuly removed");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    location.reload();
+  };
 
   return (
     <Fragment>
@@ -95,7 +118,11 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
         <img src={auction.imgURl} className="img-card" alt="..." />
         {myAuction ? (
           <ButtonGroup className="edit-button-group">
-            <Button className="delete" variant="outline-dark">
+            <Button
+              className="delete"
+              variant="outline-dark"
+              onClick={handleDelete}
+            >
               <FontAwesomeIcon icon={faTrash} />
             </Button>
             <Button variant="dark" className="edit-button">
