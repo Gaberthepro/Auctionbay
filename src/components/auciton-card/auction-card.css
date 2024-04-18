@@ -76,7 +76,7 @@
 }
 
 .delete:hover {
-  cursor: pointer;
+  cursor: pointer !important;
   color: white !important;
   background-color: black !important;
 }
