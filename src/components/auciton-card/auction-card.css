@@ -39,11 +39,11 @@
 }
 
 .img-card {
-  padding: 2px;
+  padding: 0.125rem;
   border-radius: 10%;
-  margin: 0 4px 0 4px;
-  width: 208px;
-  height: 150px;
+  margin: 0 0.25rem 0 0.25rem;
+  width: 13rem;
+  height: 9.375rem;
   object-fit: fill;
 }
 
