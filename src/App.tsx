@@ -8,6 +8,7 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.min.css";
+import { NotFoundPage } from "./pages/404/NotFoundPage";
 
 function App() {
   const currentTime = new Date().getTime();
@@ -32,6 +33,7 @@ function App() {
           <Route path="/Home/Bidding" element={<Home />} />
           <Route path="/Home/Won" element={<Home />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
