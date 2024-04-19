@@ -1,27 +1,36 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Image from "react-bootstrap/Image";
-import "./addAuction.css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 import S3 from "react-aws-s3-typescript";
+import { Auction } from "../../auciton-card/auction-card";
+import FormatDate from "../../../helpers/formatdate";
 
-function AddAuctioon({ show, onHide }: any) {
-  const [PreviewImg, setPreviewImg] = useState(
-    "https://color-hex.org/colors/f6f6f4.png"
-  );
+interface EditAuctionProps {
+  show: boolean;
+  onHide: () => void;
+  auction?: Auction;
+}
+
+const EditAuction: React.FC<EditAuctionProps> = ({ show, onHide, auction }) => {
+  const [PreviewImg, setPreviewImg] = useState(auction?.imgURl);
   const [ImgFile, setImgFile] = useState(null);
-  const [Title, setTitle] = useState("");
-  const [Description, setDescription] = useState("");
-  const [Starting_price, setStartingPrice] = useState(0.0);
-  const [Date, setEndDate] = useState("");
-  const [addImgButton, setAddImgButton] = useState(false);
-  const [Trash, setTrashButton] = useState(true);
-  const user_id = localStorage.getItem("user_id");
+  const [Title, setTitle] = useState(auction?.title);
+  const [Description, setDescription] = useState(auction?.description);
+  const [End_date, setEndDate] = useState("");
+  useEffect(() => {
+    if (auction?.end_date) {
+      const formattedDate = FormatDate(auction.end_date);
+      setEndDate(formattedDate);
+    }
+  }, [auction?.end_date]);
+  const [addImgButton, setAddImgButton] = useState(true);
+  const [Trash, setTrashButton] = useState(false);
   const inputFile: any = useRef(null);
   let preview: any;
   var Status: number;
@@ -63,32 +72,35 @@ function AddAuctioon({ show, onHide }: any) {
   };
 
   const handleAddAuction = async () => {
+    let imageUrl = auction?.imgURl;
     //AWS S3 shranjevanje
-    let imageUrl = null;
-    const ReactS3Client = new S3({
-      accessKeyId: "AKIAYRUDS2PLK4KNBQ4Q",
-      secretAccessKey: "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",
-      bucketName: "skilup-mentor-auctionbay",
-      region: "eu-central-1",
-      s3Url: "https://skilup-mentor-auctionbay.s3.eu-central-1.amazonaws.com"
-    });
-
     if (ImgFile != null) {
-      try {
-        const data = await ReactS3Client.uploadFile(ImgFile);
-        imageUrl = data.location;
-      } catch (err) {
-        console.log(err);
+      const ReactS3Client = new S3({
+        accessKeyId: "AKIAYRUDS2PLK4KNBQ4Q",
+        secretAccessKey: "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",
+        bucketName: "skilup-mentor-auctionbay",
+        region: "eu-central-1",
+        s3Url: "https://skilup-mentor-auctionbay.s3.eu-central-1.amazonaws.com"
+      });
+
+      if (ImgFile != null) {
+        try {
+          const data = await ReactS3Client.uploadFile(ImgFile);
+          imageUrl = data.location;
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
-
     if (PreviewImg == "https://color-hex.org/colors/f6f6f4.png") {
       notyf.error("Pleas provide img");
-      setTitle("");
-      setDescription("");
-      setStartingPrice(0);
-      setEndDate("");
-      setPreviewImg("https://color-hex.org/colors/f6f6f4.png");
+      setTitle(auction?.title);
+      setDescription(auction?.description);
+      if (auction?.end_date) {
+        const formattedDate = FormatDate(auction.end_date);
+        setEndDate(formattedDate);
+      }
+      setPreviewImg(auction?.imgURl);
       setImgFile(null);
       onHide();
       return;
@@ -97,39 +109,53 @@ function AddAuctioon({ show, onHide }: any) {
     const AuctionData = {
       title: Title,
       description: Description,
-      starting_price: Starting_price,
-      end_date: Date,
-      imgURl: imageUrl,
-      userId: user_id
+      end_date: End_date,
+      imgURl: imageUrl
     };
 
     await axios
-      .post("http://localhost:3000/me/auction/", AuctionData)
+      .put("http://localhost:3000/me/auction/" + auction?.id, AuctionData)
       .then((response) => (Status = response.status))
       .catch((error) => {
         notyf.error(error.response.data.message[0]);
       });
 
-    if (Status == 201) {
-      notyf.success("Auction succesfuly added");
-      setTitle("");
-      setDescription("");
-      setStartingPrice(0);
-      setEndDate("");
-      setPreviewImg("https://color-hex.org/colors/f6f6f4.png");
+    if (Status == 200) {
+      notyf.success("Auction succesfuly updatd");
+      setTitle(auction?.title);
+      setDescription(auction?.description);
+      if (auction?.end_date) {
+        const formattedDate = FormatDate(auction.end_date);
+        setEndDate(formattedDate);
+      }
+      setPreviewImg(auction?.imgURl);
       setImgFile(null);
-      setTrashButton(true);
-      setAddImgButton(false);
+      setTrashButton(false);
+      setAddImgButton(true);
       onHide();
       location.reload();
     }
+  };
+
+  const handleDiscard = () => {
+    setTitle(auction?.title);
+    setDescription(auction?.description);
+    if (auction?.end_date) {
+      const formattedDate = FormatDate(auction.end_date);
+      setEndDate(formattedDate);
+    }
+    setPreviewImg(auction?.imgURl);
+    setImgFile(null);
+    setTrashButton(false);
+    setAddImgButton(true);
+    onHide();
   };
 
   return (
     <Fragment>
       <Modal show={show} onHide={onHide}>
         <Modal.Header>
-          <Modal.Title>Add auction</Modal.Title>
+          <Modal.Title>Edit Auction</Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal-body">
           <div className="image-container">
@@ -188,55 +214,21 @@ function AddAuctioon({ show, onHide }: any) {
               />
             </div>
           </div>
-          <div className="container">
-            <div className="row">
-              <div className="col-sm">
-                <div className="starting-price-label">
-                  <label
-                    htmlFor="exampleFormControlInput1"
-                    className="form-label"
-                  >
-                    Starting price
-                  </label>
-                </div>
-                <div className="input-group mb-3">
-                  <input
-                    type="number"
-                    className="form-control price"
-                    min={0}
-                    step=".01"
-                    placeholder="Starting price"
-                    value={Starting_price}
-                    onChange={(e) =>
-                      setStartingPrice(parseFloat(e.target.value))
-                    }
-                  />
-                  <span className="input-group-text euro">€</span>
-                </div>
-              </div>
-              <div className="col-sm">
-                <div className="end-date-label">
-                  <label
-                    htmlFor="exampleFormControlInput1"
-                    className="form-label"
-                  >
-                    End date
-                  </label>
-                </div>
-                <input
-                  type="datetime-local"
-                  className="form-control date"
-                  placeholder="End date"
-                  value={Date}
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-              </div>
-            </div>
+          <div className="end-date-label">
+            <label htmlFor="exampleFormControlInput1" className="form-label">
+              End date
+            </label>
           </div>
+          <input
+            type="datetime-local"
+            className="form-control date"
+            value={End_date}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
         </Modal.Body>
         <Modal.Footer>
-          <Button className="close" variant="secondary" onClick={onHide}>
-            Close
+          <Button className="close" variant="secondary" onClick={handleDiscard}>
+            Discard changes
           </Button>
           <Button className="save" variant="primary" onClick={handleAddAuction}>
             Save Changes
@@ -245,6 +237,6 @@ function AddAuctioon({ show, onHide }: any) {
       </Modal>
     </Fragment>
   );
-}
+};
 
-export default AddAuctioon;
+export default EditAuction;
