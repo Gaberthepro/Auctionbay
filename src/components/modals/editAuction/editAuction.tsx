@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Image from "react-bootstrap/Image";
@@ -9,6 +9,7 @@ import { Notyf } from "notyf";
 import "notyf/notyf.min.css";
 import S3 from "react-aws-s3-typescript";
 import { Auction } from "../../auciton-card/auction-card";
+import FormatDate from "../../../helpers/formatdate";
 
 interface EditAuctionProps {
   show: boolean;
@@ -21,10 +22,15 @@ const EditAuction: React.FC<EditAuctionProps> = ({ show, onHide, auction }) => {
   const [ImgFile, setImgFile] = useState(null);
   const [Title, setTitle] = useState(auction?.title);
   const [Description, setDescription] = useState(auction?.description);
-  const [Date, setEndDate] = useState(auction?.end_date);
+  const [End_date, setEndDate] = useState("");
+  useEffect(() => {
+    if (auction?.end_date) {
+      const formattedDate = FormatDate(auction.end_date);
+      setEndDate(formattedDate);
+    }
+  }, [auction?.end_date]);
   const [addImgButton, setAddImgButton] = useState(true);
   const [Trash, setTrashButton] = useState(false);
-  const user_id = localStorage.getItem("user_id");
   const inputFile: any = useRef(null);
   let preview: any;
   var Status: number;
@@ -66,30 +72,34 @@ const EditAuction: React.FC<EditAuctionProps> = ({ show, onHide, auction }) => {
   };
 
   const handleAddAuction = async () => {
+    let imageUrl = auction?.imgURl;
     //AWS S3 shranjevanje
-    let imageUrl = null;
-    const ReactS3Client = new S3({
-      accessKeyId: "AKIAYRUDS2PLK4KNBQ4Q",
-      secretAccessKey: "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",
-      bucketName: "skilup-mentor-auctionbay",
-      region: "eu-central-1",
-      s3Url: "https://skilup-mentor-auctionbay.s3.eu-central-1.amazonaws.com"
-    });
-
     if (ImgFile != null) {
-      try {
-        const data = await ReactS3Client.uploadFile(ImgFile);
-        imageUrl = data.location;
-      } catch (err) {
-        console.log(err);
+      const ReactS3Client = new S3({
+        accessKeyId: "AKIAYRUDS2PLK4KNBQ4Q",
+        secretAccessKey: "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",
+        bucketName: "skilup-mentor-auctionbay",
+        region: "eu-central-1",
+        s3Url: "https://skilup-mentor-auctionbay.s3.eu-central-1.amazonaws.com"
+      });
+
+      if (ImgFile != null) {
+        try {
+          const data = await ReactS3Client.uploadFile(ImgFile);
+          imageUrl = data.location;
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
-
     if (PreviewImg == "https://color-hex.org/colors/f6f6f4.png") {
       notyf.error("Pleas provide img");
       setTitle(auction?.title);
       setDescription(auction?.description);
-      setEndDate("");
+      if (auction?.end_date) {
+        const formattedDate = FormatDate(auction.end_date);
+        setEndDate(formattedDate);
+      }
       setPreviewImg(auction?.imgURl);
       setImgFile(null);
       onHide();
@@ -99,24 +109,26 @@ const EditAuction: React.FC<EditAuctionProps> = ({ show, onHide, auction }) => {
     const AuctionData = {
       title: Title,
       description: Description,
-      end_date: Date,
-      imgURl: imageUrl,
-      userId: user_id
+      end_date: End_date,
+      imgURl: imageUrl
     };
 
     await axios
-      .post("http://localhost:3000/me/auction/", AuctionData)
+      .put("http://localhost:3000/me/auction/" + auction?.id, AuctionData)
       .then((response) => (Status = response.status))
       .catch((error) => {
         notyf.error(error.response.data.message[0]);
       });
 
-    if (Status == 201) {
-      notyf.success("Auction succesfuly added");
-      setTitle("");
-      setDescription("");
-      setEndDate(Date);
-      setPreviewImg("https://color-hex.org/colors/f6f6f4.png");
+    if (Status == 200) {
+      notyf.success("Auction succesfuly updatd");
+      setTitle(auction?.title);
+      setDescription(auction?.description);
+      if (auction?.end_date) {
+        const formattedDate = FormatDate(auction.end_date);
+        setEndDate(formattedDate);
+      }
+      setPreviewImg(auction?.imgURl);
       setImgFile(null);
       setTrashButton(false);
       setAddImgButton(true);
@@ -128,7 +140,10 @@ const EditAuction: React.FC<EditAuctionProps> = ({ show, onHide, auction }) => {
   const handleDiscard = () => {
     setTitle(auction?.title);
     setDescription(auction?.description);
-    setEndDate(Date);
+    if (auction?.end_date) {
+      const formattedDate = FormatDate(auction.end_date);
+      setEndDate(formattedDate);
+    }
     setPreviewImg(auction?.imgURl);
     setImgFile(null);
     setTrashButton(false);
@@ -207,7 +222,7 @@ const EditAuction: React.FC<EditAuctionProps> = ({ show, onHide, auction }) => {
           <input
             type="datetime-local"
             className="form-control date"
-            value={Date}
+            value={End_date}
             onChange={(e) => setEndDate(e.target.value)}
           />
         </Modal.Body>
