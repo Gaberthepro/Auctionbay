@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.min.css";
 import AuctionPage from "./pages/Auction/auction";
+import { NotFoundPage } from "./pages/404/NotFoundPage";
 
 function App() {
   const currentTime = new Date().getTime();
@@ -34,6 +35,7 @@ function App() {
           <Route path="/Home/Won" element={<Home />} />
           <Route path="/Auction/:id" element={<AuctionPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
