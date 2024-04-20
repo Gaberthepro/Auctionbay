@@ -35,7 +35,6 @@ export function AuctionPage() {
   const [auction_user_id, setAuctionUserId] = useState(0);
   const [countBids, setCountBids] = useState(0);
   const [bids, setBids] = useState<Bid[]>([]);
-  const [errorMessage, seterrorMessage] = useState("");
   const notyf = new Notyf({
     duration: 3000,
     position: {
