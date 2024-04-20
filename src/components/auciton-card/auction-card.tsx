@@ -77,7 +77,7 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
         console.log(error);
       });
 
-    location.reload();
+    //location.reload();
   };
 
   return (
