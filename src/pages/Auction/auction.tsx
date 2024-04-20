@@ -35,6 +35,7 @@ export function AuctionPage() {
   const [auction_user_id, setAuctionUserId] = useState(0);
   const [countBids, setCountBids] = useState(0);
   const [bids, setBids] = useState<Bid[]>([]);
+  const [errorMessage, seterrorMessage] = useState("");
   const notyf = new Notyf({
     duration: 3000,
     position: {
@@ -68,7 +69,6 @@ export function AuctionPage() {
     axios
       .get("http://localhost:3000/bids/" + id)
       .then((response) => {
-        console.log(response.data);
         setBids(response.data);
         setCountBids(response.data.length);
       })
@@ -124,7 +124,9 @@ export function AuctionPage() {
             setCountBids(countBids + 1);
           })
           .catch(() => {
-            notyf.error("You must bid more then current price");
+            notyf.error(
+              "You must bid more then current price or auction is over"
+            );
           });
       }
     }

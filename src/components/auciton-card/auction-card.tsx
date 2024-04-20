@@ -45,6 +45,7 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
   const targetDate: any = new Date(auction.end_date);
   const now: any = new Date();
   const diffInHours = Math.round((targetDate - now) / 1000 / 60 / 60);
+  const diffInDays = Math.round((targetDate - now) / 1000 / 60 / 60 / 24);
 
   if (diffInHours > 24) {
     over24h = true;
@@ -107,14 +108,14 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
                         id="clock-badge-less-24"
                         className="badge rounded-pill text-bg-danger"
                       >
-                        {diffInHours} h <FontAwesomeIcon icon={faClock} />
+                        {diffInDays} days <FontAwesomeIcon icon={faClock} />
                       </span>
                     ) : (
                       <span
                         id="clock-badge"
                         className="badge rounded-pill text-bg-danger"
                       >
-                        24 <FontAwesomeIcon icon={faClock} />
+                        {diffInHours} h <FontAwesomeIcon icon={faClock} />
                       </span>
                     )}
                   </div>

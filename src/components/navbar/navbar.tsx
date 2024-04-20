@@ -126,7 +126,6 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
               name="btnradio"
               id="btnradio2"
               autoComplete="off"
-              defaultChecked
               onClick={handleToProfile}
             />
             <label className="btn btn-outline-dark" htmlFor="btnradio2">

@@ -1,0 +1,12 @@
+.empty-content-bidding {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.parent-element-bidding {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}

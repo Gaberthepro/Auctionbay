@@ -10,27 +10,56 @@ export function Auctions() {
   const user_id = localStorage.getItem("user_id");
 
   const [auctions, setAuctions] = useState<Auction[]>([]);
+  const [isEmpty, setIsEmpty] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/auctions/" + user_id)
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/auctions/" + user_id
+        );
         setAuctions(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        setIsEmpty(response.data.length === 0);
+      } catch (error) {
+        console.error(error);
+        setIsEmpty(true);
+      }
+    };
+
+    fetchData();
   }, [user_id]);
+
+  useEffect(() => {
+    if (isEmpty) {
+      const timer = setTimeout(() => {
+        setShowMessage(true);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isEmpty]);
 
   return (
     <Fragment>
       <div className="auction-body">
         <h1>Auctions</h1>
-        <div className="cards-grid-container">
-          {auctions.map((auction) => (
-            <Card key={auction.id} auction={auction} />
-          ))}
-        </div>
+        {isEmpty ? showMessage &&(
+          <div className="parent-element-bidding">
+            <div className="empty-content-bidding">
+              <h2>Oh no, no auctions yet!</h2>
+              <p>
+                To add new auction click “+” button in navigation bar or wait
+                for other users to add new auctions.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="cards-grid-container">
+            {auctions.map((auction) => (
+              <Card key={auction.id} auction={auction} />
+            ))}
+          </div>
+        )}
       </div>
     </Fragment>
   );
