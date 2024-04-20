@@ -2,7 +2,7 @@ import { Fragment } from "react/jsx-runtime";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./auction.css";
 import { Auction } from "../../components/auciton-card/auction-card";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
@@ -13,6 +13,7 @@ import ProfileSettings from "../../components/modals/profile/profile-settings/pr
 import Navbar from "../../components/navbar/navbar";
 import { Notyf } from "notyf";
 import FormatDateBid from "../../helpers/formatdateforbids";
+import NotFoundPage from "../404/NotFoundPage";
 interface Bid {
   bid_date: Date;
   price: string;
@@ -26,6 +27,7 @@ interface Bid {
 export function AuctionPage() {
   let { id } = useParams();
   let auction: Auction;
+  let navigate = useNavigate();
   const user_id = localStorage.getItem("user_id");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -89,6 +91,7 @@ export function AuctionPage() {
       })
       .catch((error) => {
         console.log(error);
+        navigate("/404");
       });
   }, [id]);
 
