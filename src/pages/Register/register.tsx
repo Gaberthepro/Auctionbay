@@ -78,6 +78,7 @@ function register() {
           const token = localStorage.getItem("access_token");
           const data = await Me(token);
           const user_id = (await data).data.id;
+          localStorage.setItem("user_id", user_id);
           await SaveDataToLocal(user_id);
           navigate("/Home");
         }, 1000);

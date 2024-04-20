@@ -34,7 +34,7 @@ export function Auctions() {
     if (isEmpty) {
       const timer = setTimeout(() => {
         setShowMessage(true);
-      }, 100);
+      }, 150);
       return () => clearTimeout(timer);
     }
   }, [isEmpty]);
