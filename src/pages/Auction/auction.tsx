@@ -13,7 +13,6 @@ import ProfileSettings from "../../components/modals/profile/profile-settings/pr
 import Navbar from "../../components/navbar/navbar";
 import { Notyf } from "notyf";
 import FormatDateBid from "../../helpers/formatdateforbids";
-import NotFoundPage from "../404/NotFoundPage";
 interface Bid {
   bid_date: Date;
   price: string;
@@ -171,7 +170,7 @@ export function AuctionPage() {
             </Row>
             <Row className="bid-history">
               <div>
-                <h3>Bidding history</h3>
+                <h3>Bidding history ({countBids})</h3>
                 {bids.slice(0, 10).map((bid, index) => (
                   <div key={index} className="bid-history-detail">
                     <img
@@ -179,7 +178,9 @@ export function AuctionPage() {
                       src={bid.user.imgURl}
                       alt="Bid Profile"
                     />
-                    <p className="bid-p">{bid.user.name}</p>
+                    <p className="bid-p">
+                      {bid.user.name} {bid.user.surname}
+                    </p>
                     <div className="right-aligned">
                       <p className="bid-p">{FormatDateBid(bid.bid_date)}</p>
                       <Button className="bid-history-price" variant="primary">

@@ -77,56 +77,100 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
         console.log(error);
       });
 
-    //location.reload();
+    location.reload();
   };
 
   return (
     <Fragment>
       <div className="card">
-        <a
-          href={`/auction/${auction.id}`}
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          <div className="card-body">
-            {isDone ? (
-              <div className="row">
-                <div className="col" id="left-badge">
-                  <span id="done" className="badge badge-pill badge-dark">
-                    Done
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <div className="row">
-                <div className="col" id="left-badge">
-                  <span className="badge rounded-pill text-bg-danger">
-                    Outbid
-                  </span>
-                </div>
-                <div className="col" id="right-badge">
-                  {over24h ? (
-                    <span
-                      id="clock-badge-less-24"
-                      className="badge rounded-pill text-bg-danger"
-                    >
-                      {diffInHours} h <FontAwesomeIcon icon={faClock} />
+        {myAuction ? (
+          <>
+            <div className="card-body">
+              {isDone ? (
+                <div className="row">
+                  <div className="col" id="left-badge">
+                    <span id="done" className="badge badge-pill badge-dark">
+                      Done
                     </span>
-                  ) : (
-                    <span
-                      id="clock-badge"
-                      className="badge rounded-pill text-bg-danger"
-                    >
-                      24 <FontAwesomeIcon icon={faClock} />
-                    </span>
-                  )}
+                  </div>
                 </div>
-              </div>
-            )}
-            <h4 className="card-title">{auction.title}</h4>
-            <h4 className="card-text">{auction.starting_price} €</h4>
-          </div>
-          <img src={auction.imgURl} className="img-card" alt="..." />
-        </a>
+              ) : (
+                <div className="row">
+                  <div className="col" id="left-badge">
+                    <span className="badge rounded-pill text-bg-danger">
+                      Outbid
+                    </span>
+                  </div>
+                  <div className="col" id="right-badge">
+                    {over24h ? (
+                      <span
+                        id="clock-badge-less-24"
+                        className="badge rounded-pill text-bg-danger"
+                      >
+                        {diffInHours} h <FontAwesomeIcon icon={faClock} />
+                      </span>
+                    ) : (
+                      <span
+                        id="clock-badge"
+                        className="badge rounded-pill text-bg-danger"
+                      >
+                        24 <FontAwesomeIcon icon={faClock} />
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+              <h4 className="card-title">{auction.title}</h4>
+              <h4 className="card-text">{auction.starting_price} €</h4>
+            </div>
+            <img src={auction.imgURl} className="img-card" alt="..." />
+          </>
+        ) : (
+          <a
+            href={`/auction/${auction.id}`}
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <div className="card-body">
+              {isDone ? (
+                <div className="row">
+                  <div className="col" id="left-badge">
+                    <span id="done" className="badge badge-pill badge-dark">
+                      Done
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div className="row">
+                  <div className="col" id="left-badge">
+                    <span className="badge rounded-pill text-bg-danger">
+                      Outbid
+                    </span>
+                  </div>
+                  <div className="col" id="right-badge">
+                    {over24h ? (
+                      <span
+                        id="clock-badge-less-24"
+                        className="badge rounded-pill text-bg-danger"
+                      >
+                        {diffInHours} h <FontAwesomeIcon icon={faClock} />
+                      </span>
+                    ) : (
+                      <span
+                        id="clock-badge"
+                        className="badge rounded-pill text-bg-danger"
+                      >
+                        24 <FontAwesomeIcon icon={faClock} />
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+              <h4 className="card-title">{auction.title}</h4>
+              <h4 className="card-text">{auction.starting_price} €</h4>
+            </div>
+            <img src={auction.imgURl} className="img-card" alt="..." />
+          </a>
+        )}
         {myAuction ? (
           <ButtonGroup className="edit-button-group">
             <Button
