@@ -1,7 +1,8 @@
 .avatar-logo {
-  width: 60px;
-  height: 60px;
+  width: 3.75rem;
+  height: 3.75rem;
   border-radius: 50%;
+  margin-left: 0.625rem;
 }
 
 .btn-link {
@@ -71,8 +72,8 @@
 }
 
 .row-profile {
-  padding-bottom: 5px;
-  padding-top: 5px;
+  padding-bottom: 0.3125rem;
+  padding-top: 0.3125rem;
 }
 
 .avatar {
@@ -100,4 +101,10 @@
   border-radius: 1rem !important;
   width: 12.75rem;
   height: 7rem;
+}
+
+.switcher {
+  width: 15.6875rem !important;
+  height: 4rem !important;
+  padding: 0.25rem;
 }

@@ -1,7 +1,12 @@
 import { Fragment } from "react/jsx-runtime";
 import "./navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGear,
+  faHouse,
+  faPlus,
+  faUser
+} from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import UserLocalStored from "../../services/localStoredData";
 import { useNavigate } from "react-router-dom";
@@ -104,7 +109,7 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
             className="avatar-logo"
           />
           <div
-            className="btn-group  btn-group-lg"
+            className="btn-group  btn-group-lg switcher"
             role="group"
             aria-label="Basic radio toggle button group"
           >
@@ -116,7 +121,17 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
               autoComplete="off"
               onClick={handleToAuctioon}
             />
-            <label className="btn btn-outline-dark" htmlFor="btnradio1">
+            <label
+              className="btn btn-outline-dark home"
+              htmlFor="btnradio1"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: ".25rem"
+              }}
+            >
+              <FontAwesomeIcon icon={faHouse} />
               Auctions
             </label>
 
@@ -128,7 +143,17 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
               autoComplete="off"
               onClick={handleToProfile}
             />
-            <label className="btn btn-outline-dark" htmlFor="btnradio2">
+            <label
+              className="btn btn-outline-dark"
+              htmlFor="btnradio2"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: ".25rem"
+              }}
+            >
+              <FontAwesomeIcon icon={faUser} />
               Profile
             </label>
           </div>

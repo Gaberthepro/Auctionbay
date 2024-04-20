@@ -89,7 +89,7 @@ export function Home() {
       />
       {onProfile ? (
         <>
-          <h1>
+          <h1 style={{ marginLeft: "1rem" }}>
             Hello {user_data.name} {user_data.surname}!
           </h1>
           <div className="button-group-profile">
