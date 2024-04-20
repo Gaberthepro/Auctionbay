@@ -16,8 +16,6 @@ import Bidding from "../Bidding/bidding";
 import Won from "../Won/won";
 
 export function Home() {
-  const token = localStorage.getItem("access_token");
-  const user_id = localStorage.getItem("user_id");
   const user_data = UserLocalStored();
   var currentURL = window.location.href;
   var onProfile: boolean = true;

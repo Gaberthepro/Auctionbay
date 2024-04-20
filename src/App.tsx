@@ -8,6 +8,7 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.min.css";
+import AuctionPage from "./pages/Auction/auction";
 import { NotFoundPage } from "./pages/404/NotFoundPage";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/Auctions" element={<Home />} />
           <Route path="/Home/Bidding" element={<Home />} />
           <Route path="/Home/Won" element={<Home />} />
+          <Route path="/Auction/:id" element={<AuctionPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
