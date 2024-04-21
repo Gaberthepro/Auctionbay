@@ -93,10 +93,10 @@ function register() {
     <Fragment>
       <div className="container text-center">
         <div className="row">
-          <div className="col-7">
+          <div className="col-12 col-md-7 d-none d-md-block">
             <img src="src/assets/images/login.png"></img>
           </div>
-          <div id="login" className="col-5">
+          <div id="login" className="col-12 col-md-5">
             <div className="logo">
               <img
                 src="src/assets/images/logo.png"

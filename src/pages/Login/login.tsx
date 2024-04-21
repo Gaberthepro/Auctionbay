@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import Me from "../../services/me";
 import SaveDataToLocal from "../../services/saveDataToLocal";
 import { Notyf } from "notyf";
+import Logo from "../../assets/images/logo.png";
 
 function Login() {
   const [Email, setEmail] = useState("");
@@ -66,16 +67,12 @@ function Login() {
     <Fragment>
       <div className="container text-center">
         <div className="row">
-          <div className="col-7">
+          <div className="col-12 col-md-7 d-none d-md-block">
             <img src="src/assets/images/login.png"></img>
           </div>
-          <div id="login" className="col-5">
+          <div id="login" className="col-12 col-md-5">
             <div className="logo">
-              <img
-                src="src/assets/images/logo.png"
-                alt="Avatar"
-                className="avatar"
-              />
+              <img src={Logo} alt="Avatar" className="avatar" />
             </div>
             <div className="Hello">
               <h1>Welcome back!</h1>
