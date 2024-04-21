@@ -94,13 +94,28 @@
 }
 
 .btn-outline-light {
-  color: black !important;
+  width: 10.75rem !important;
+  height: 2.5rem !important;
+  padding: 0.5rem, 1rem, 0.5rem, 1rem !important;
+  color: #272d2d !important;
+  border: 0.0625rem solid #272d2d !important;
+  border-radius: 1rem !important;
+}
+
+.btn-outline-light:hover {
+  background-color: #272d2d !important;
+  color: white !important;
+}
+
+.settings {
+  border: none !important;
 }
 
 .show {
   border-radius: 1rem !important;
   width: 12.75rem;
-  height: 7rem;
+  height: 8.0625rem;
+  gap: 1.0625rem;
 }
 
 .switcher {

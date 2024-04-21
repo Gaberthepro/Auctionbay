@@ -255,7 +255,7 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
                   >
                     <button
                       type="button"
-                      className="btn btn-outline-light"
+                      className="btn btn-outline-light settings"
                       style={{ marginTop: "0.5rem" }}
                       onClick={onShowModalProfile}
                     >
