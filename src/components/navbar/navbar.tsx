@@ -15,6 +15,7 @@ import Logo from "../../assets/images/logo.png";
 export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
   var isLoggedIn: boolean;
   var onLanding: boolean;
+  var onHomeSwitch: boolean = true;
   var currentURL = window.location.href;
   var parts = currentURL.split("/");
   var endpoint = parts[parts.length - 1];
@@ -66,6 +67,10 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
     navigate("/Home");
   };
 
+  if (currentURL.toLowerCase().includes("auction")) {
+    onHomeSwitch = false;
+  }
+
   return (
     <Fragment>
       {onLanding ? (
@@ -103,60 +108,110 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
         </nav>
       ) : (
         <nav className="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
-          <img
-            src="src/assets/images/logo.png"
-            alt="Avatar"
-            className="avatar-logo"
-          />
-          <div
-            className="btn-group  btn-group-lg switcher"
-            role="group"
-            aria-label="Basic radio toggle button group"
-          >
-            <input
-              type="radio"
-              className="btn-check"
-              name="btnradio"
-              id="btnradio1"
-              autoComplete="off"
-              onClick={handleToAuctioon}
-            />
-            <label
-              className="btn btn-outline-dark home"
-              htmlFor="btnradio1"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: ".25rem"
-              }}
+          <img src={Logo} alt="Avatar" className="avatar-logo" />
+          {onHomeSwitch ? (
+            <div
+              className="btn-group  btn-group-lg switcher"
+              role="group"
+              aria-label="Basic radio toggle button group"
             >
-              <FontAwesomeIcon icon={faHouse} />
-              Auctions
-            </label>
+              <input
+                type="radio"
+                className="btn-check"
+                name="btnradio"
+                id="btnradio1"
+                autoComplete="off"
+                onClick={handleToAuctioon}
+              />
+              <label
+                className="btn btn-outline-dark home"
+                htmlFor="btnradio1"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: ".25rem"
+                }}
+              >
+                <FontAwesomeIcon icon={faHouse} />
+                Auctions
+              </label>
 
-            <input
-              type="radio"
-              className="btn-check"
-              name="btnradio"
-              id="btnradio2"
-              autoComplete="off"
-              onClick={handleToProfile}
-            />
-            <label
-              className="btn btn-outline-dark"
-              htmlFor="btnradio2"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: ".25rem"
-              }}
+              <input
+                type="radio"
+                className="btn-check"
+                name="btnradio"
+                id="btnradio2"
+                autoComplete="off"
+                onClick={handleToProfile}
+                defaultChecked
+              />
+              <label
+                className="btn btn-outline-dark"
+                htmlFor="btnradio2"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: ".25rem"
+                }}
+              >
+                <FontAwesomeIcon icon={faUser} />
+                Profile
+              </label>
+            </div>
+          ) : (
+            <div
+              className="btn-group  btn-group-lg switcher"
+              role="group"
+              aria-label="Basic radio toggle button group"
             >
-              <FontAwesomeIcon icon={faUser} />
-              Profile
-            </label>
-          </div>
+              <input
+                type="radio"
+                className="btn-check"
+                name="btnradio"
+                id="btnradio1"
+                autoComplete="off"
+                onClick={handleToAuctioon}
+                defaultChecked
+              />
+              <label
+                className="btn btn-outline-dark home"
+                htmlFor="btnradio1"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: ".25rem"
+                }}
+              >
+                <FontAwesomeIcon icon={faHouse} />
+                Auctions
+              </label>
+
+              <input
+                type="radio"
+                className="btn-check"
+                name="btnradio"
+                id="btnradio2"
+                autoComplete="off"
+                onClick={handleToProfile}
+              />
+              <label
+                className="btn btn-outline-dark"
+                htmlFor="btnradio2"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: ".25rem"
+                }}
+              >
+                <FontAwesomeIcon icon={faUser} />
+                Profile
+              </label>
+            </div>
+          )}
           <div
             className="navbar-collapse collapse w-100"
             id="collapsingNavbar3"

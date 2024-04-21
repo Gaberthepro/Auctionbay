@@ -85,7 +85,7 @@ function ChangeProfilePic({ showChangePic, onHideChangePic }: any) {
       setprofileFile(null);
       setTimeout(() => {
         onHideChangePic();
-      }, 500);
+      }, 200);
     }
   };
 

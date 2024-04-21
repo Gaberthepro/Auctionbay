@@ -5,7 +5,7 @@ import { faClock, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Button, ButtonGroup } from "react-bootstrap";
 import { Notyf } from "notyf";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditAuction from "../modals/editAuction/editAuction";
 
 export interface Auction {
@@ -27,6 +27,8 @@ interface AuctionCardProps {
 const Card: React.FC<AuctionCardProps> = ({ auction }) => {
   var over24h: boolean;
   var isDone: boolean;
+  const [badgeStatus, setBadgeStatus] = useState("progress");
+  const [bids, setBids] = useState([]);
   const user_id = localStorage.getItem("user_id");
   var myAuction = false;
   const notyf = new Notyf({
@@ -81,6 +83,32 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
     location.reload();
   };
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/bids/" + auction.id)
+      .then((response) => {
+        setBids(response.data);
+        const firstBid = response.data[0];
+        if (bids.length == 0) {
+          setBadgeStatus("progress");
+        }
+        if (firstBid.user.id == user_id) {
+          setBadgeStatus("winning");
+        } else {
+          const isOutbid = bids.some(
+            (bid: any, index: any) => index !== 0 && bid.user.id === user_id
+          );
+          console.log(isOutbid)
+          if (!isOutbid) {
+            setBadgeStatus("outbid");
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [auction.id, badgeStatus, , user_id]);
+
   return (
     <Fragment>
       <div className="card">
@@ -98,9 +126,28 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
               ) : (
                 <div className="row">
                   <div className="col" id="left-badge">
-                    <span className="badge rounded-pill text-bg-danger">
-                      Outbid
-                    </span>
+                    {badgeStatus == "outbid" && !myAuction ? (
+                      <span
+                        id="danger"
+                        className="badge rounded-pill text-bg-danger"
+                      >
+                        Outbid
+                      </span>
+                    ) : badgeStatus == "winning" ? (
+                      <span
+                        id="succes"
+                        className="badge rounded-pill text-bg-success"
+                      >
+                        Winning
+                      </span>
+                    ) : (
+                      <span
+                        id="warning"
+                        className="badge rounded-pill text-bg-warning"
+                      >
+                        In progress
+                      </span>
+                    )}
                   </div>
                   <div className="col" id="right-badge">
                     {over24h ? (
@@ -143,9 +190,28 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
               ) : (
                 <div className="row">
                   <div className="col" id="left-badge">
-                    <span className="badge rounded-pill text-bg-danger">
-                      Outbid
-                    </span>
+                    {badgeStatus == "outbid" ? (
+                      <span
+                        id="danger"
+                        className="badge rounded-pill text-bg-danger"
+                      >
+                        Outbid
+                      </span>
+                    ) : badgeStatus == "winning" ? (
+                      <span
+                        id="succes"
+                        className="badge rounded-pill text-bg-success"
+                      >
+                        Winning
+                      </span>
+                    ) : (
+                      <span
+                        id="warning"
+                        className="badge rounded-pill text-bg-warning"
+                      >
+                        In progress
+                      </span>
+                    )}
                   </div>
                   <div className="col" id="right-badge">
                     {over24h ? (

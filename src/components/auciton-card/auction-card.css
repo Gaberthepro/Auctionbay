@@ -80,3 +80,18 @@
   color: white !important;
   background-color: black !important;
 }
+
+#danger {
+  background-color: #ffaa98 !important;
+  color: #071015 !important;
+}
+
+#succes {
+  background-color: #adff90 !important;
+  color: #071015 !important;
+}
+
+#warning {
+  background-color: #f9ff90 !important;
+  color: #071015 !important;
+}
