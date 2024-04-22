@@ -29,11 +29,20 @@
 }
 
 .img {
-  position: absolute;
   width: 71.5rem;
   height: 50rem;
   left: 9.25rem;
   top: 31.313rem;
   border: 0.5rem solid #272d2d;
   border-radius: 2rem;
+  margin-top: 4rem;
+  background-image: url("src/assets/images/landing.png");
+  background-size: cover;
+}
+
+@media (max-width: 768px) {
+  .img {
+    background-image: url("src/assets/images/landing-mobile.png");
+    background-size: cover;
+  }
 }

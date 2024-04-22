@@ -76,10 +76,10 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
       {onLanding ? (
         <nav className="navbar navbar-expand-lg bg-light">
           <div className="container-fluid">
-            <div className="collapse navbar-collapse" id="navbarText">
+            <div className="navbar-collapse" id="navbarText">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <img src={Logo} alt="Avatar" className="avatar-logo" />
+                  <img src={Logo} alt="Avatar" className="avatar-logo landing" />
                 </li>
               </ul>
               {isLoggedIn ? (
@@ -213,7 +213,7 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
             </div>
           )}
           <div
-            className="navbar-collapse collapse w-100"
+            className="navbar-collapse collapse w-100 justify-content-between"
             id="collapsingNavbar3"
           >
             <button

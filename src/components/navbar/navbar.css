@@ -123,3 +123,48 @@
   height: 4rem !important;
   padding: 0.25rem;
 }
+
+@media (max-width: 768px) {
+  .navbar-collapse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-nav,
+  .navbar-text,
+  .btn-link,
+  .btn-dark {
+    width: 100%; /* Make elements full width */
+  }
+
+  .navbar-nav {
+    justify-content: center;
+  }
+
+  .nav-item,
+  .btn-link,
+  .btn-dark {
+    margin: 5px 0; /* Add a little vertical space between elements */
+  }
+
+  .navbar-text {
+    text-align: center; /* Center the text */
+  }
+}
+
+@media (max-width: 768px) {
+  .landing {
+    display: flex;
+    justify-content: center;
+    width: 25%;
+    height: 25%;
+    margin-left: 38%;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-collapse {
+    justify-content: flex-end !important;
+  }
+}
