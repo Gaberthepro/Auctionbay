@@ -49,11 +49,11 @@ function ChangeProfilePic({ showChangePic, onHideChangePic }: any) {
     //AWS s3 shranjevanje
     let imageUrl = null;
     const ReactS3Client = new S3({
-      accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY as string,
-      secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY as string,
-      bucketName: import.meta.env.VITE_AWS_BUCKET_NAME as string,
-      region: import.meta.env.VITE_AWS_REGION as string,
-      s3Url: import.meta.env.VITE_AWS_S3_URL as string
+      accessKeyId: process.env.VITE_AWS_ACCESS_KEY as string,
+      secretAccessKey: process.env.VITE_AWS_SECRET_ACCESS_KEY as string,
+      bucketName: process.env.VITE_AWS_BUCKET_NAME as string,
+      region: process.env.VITE_AWS_REGION as string,
+      s3Url: process.env.VITE_AWS_S3_URL as string
     });
 
     if (profileFile != null) {
