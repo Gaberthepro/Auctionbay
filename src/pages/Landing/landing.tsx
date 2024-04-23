@@ -19,11 +19,11 @@ export function Landing() {
           getting a deal on product you want!
         </p>
         {isLoggedIn ? (
-          <a href="/Home" className="btn btn-primary">
+          <a href="Home" className="btn btn-primary">
             Start bidding
           </a>
         ) : (
-          <a href="/Register" className="btn btn-primary">
+          <a href="Register" className="btn btn-primary">
             Start bidding
           </a>
         )}
