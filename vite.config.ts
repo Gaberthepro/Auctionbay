@@ -6,5 +6,10 @@ export default defineConfig({
   plugins: [react()],
   define: {
     global: {}
+  },
+  resolve: {
+    alias: {
+      "aws-sdk": "aws-sdk/dist/aws-sdk.min.js"
+    }
   }
 });
