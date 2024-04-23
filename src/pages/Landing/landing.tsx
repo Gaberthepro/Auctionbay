@@ -1,6 +1,7 @@
 import { Fragment } from "react/jsx-runtime";
 import Navbar from "../../components/navbar/navbar";
 import "./landing.css";
+import { Link } from "react-router-dom";
 
 export function Landing() {
   var isLoggedIn: boolean;
@@ -19,13 +20,13 @@ export function Landing() {
           getting a deal on product you want!
         </p>
         {isLoggedIn ? (
-          <a href="Home" className="btn btn-primary">
+          <Link to="Home" className="btn btn-primary">
             Start bidding
-          </a>
+          </Link>
         ) : (
-          <a href="Register" className="btn btn-primary">
+          <Link to="Register" className="btn btn-primary">
             Start bidding
-          </a>
+          </Link>
         )}
         <div>
           <img className="img"></img>
