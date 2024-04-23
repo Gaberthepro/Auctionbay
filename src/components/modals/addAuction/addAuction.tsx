@@ -66,11 +66,11 @@ function AddAuctioon({ show, onHide }: any) {
     //AWS S3 shranjevanje
     let imageUrl = null;
     const ReactS3Client = new S3({
-      accessKeyId: "AKIAYRUDS2PLK4KNBQ4Q",
-      secretAccessKey: "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",
-      bucketName: "skilup-mentor-auctionbay",
-      region: "eu-central-1",
-      s3Url: "https://skilup-mentor-auctionbay.s3.eu-central-1.amazonaws.com"
+      accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY as string,
+      secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY as string,
+      bucketName: import.meta.env.VITE_AWS_BUCKET_NAME as string,
+      region: import.meta.env.VITE_AWS_REGION as string,
+      s3Url: import.meta.env.VITE_AWS_S3_URL as string
     });
 
     if (ImgFile != null) {

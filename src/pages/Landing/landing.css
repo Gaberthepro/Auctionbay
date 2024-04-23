@@ -36,13 +36,13 @@
   border: 0.5rem solid #272d2d;
   border-radius: 2rem;
   margin-top: 4rem;
-  background-image: url("src/assets/images/landing.png");
+  background-image: url("../../assets/images/landing.png");
   background-size: cover;
 }
 
 @media (max-width: 768px) {
   .img {
-    background-image: url("src/assets/images/landing-mobile.png");
+    background-image: url("../../assets/images/landing-mobile.png");
     background-size: cover;
   }
 }
