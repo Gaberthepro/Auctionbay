@@ -7,6 +7,7 @@ import { Notyf } from "notyf";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import EditAuction from "../modals/editAuction/editAuction";
+import { Link } from "react-router-dom";
 
 export interface Auction {
   id: number;
@@ -174,8 +175,8 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
             <img src={auction.imgURl} className="img-card" alt="..." />
           </>
         ) : (
-          <a
-            href={`/auction/${auction.id}`}
+          <Link
+            to={`/auction/${auction.id}`}
             style={{ textDecoration: "none", color: "black" }}
           >
             <div className="card-body">
@@ -236,7 +237,7 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
               <h4 className="card-text">{auction.starting_price} €</h4>
             </div>
             <img src={auction.imgURl} className="img-card" alt="..." />
-          </a>
+          </Link>
         )}
         {myAuction ? (
           <ButtonGroup className="edit-button-group">

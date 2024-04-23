@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import UserLocalStored from "../../services/localStoredData";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
 
 export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
@@ -60,11 +60,11 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
   };
 
   const handleToAuctioon = () => {
-    navigate("/Auctions");
+    navigate("Auctions");
   };
 
   const handleToProfile = () => {
-    navigate("/Home");
+    navigate("Home");
   };
 
   if (currentURL.toLowerCase().includes("auction")) {
@@ -84,23 +84,23 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
               </ul>
               {isLoggedIn ? (
                 <span className="navbar-text">
-                  <a href="/Home" className="btn btn-link">
+                  <Link to="Home" className="btn btn-link">
                     Log in
-                  </a>
+                  </Link>
                   <span className="gap">or</span>
-                  <a href="/Home" className="btn btn-dark">
+                  <Link to="Home" className="btn btn-dark">
                     Sign Up
-                  </a>
+                  </Link>
                 </span>
               ) : (
                 <span className="navbar-text">
-                  <a href="/Login" className="btn btn-link">
+                  <Link to="Login" className="btn btn-link">
                     Log in
-                  </a>
+                  </Link>
                   <span className="gap">or</span>
-                  <a href="/Register" className="btn btn-dark">
+                  <Link to="Register" className="btn btn-dark">
                     Sign Up
-                  </a>
+                  </Link>
                 </span>
               )}
             </div>
