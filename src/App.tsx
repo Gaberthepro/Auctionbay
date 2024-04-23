@@ -36,7 +36,6 @@ function App() {
           <Route path="Auction/:id" element={<AuctionPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
-        <Route path="404" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
