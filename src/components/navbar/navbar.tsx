@@ -122,6 +122,7 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
                 id="btnradio1"
                 autoComplete="off"
                 onClick={handleToAuctioon}
+                defaultChecked
               />
               <label
                 className="btn btn-outline-dark home"
@@ -144,7 +145,6 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
                 id="btnradio2"
                 autoComplete="off"
                 onClick={handleToProfile}
-                defaultChecked
               />
               <label
                 className="btn btn-outline-dark"
@@ -173,7 +173,6 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
                 id="btnradio1"
                 autoComplete="off"
                 onClick={handleToAuctioon}
-                defaultChecked
               />
               <label
                 className="btn btn-outline-dark home"
@@ -196,6 +195,7 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
                 id="btnradio2"
                 autoComplete="off"
                 onClick={handleToProfile}
+                defaultChecked
               />
               <label
                 className="btn btn-outline-dark"
