@@ -26,17 +26,17 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
+        <Route path="Login" element={<Login />} />
+        <Route path="Register" element={<Register />} />
         <Route element={<PrivateRoutes />}>
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Auctions" element={<Home />} />
-          <Route path="/Home/Bidding" element={<Home />} />
-          <Route path="/Home/Won" element={<Home />} />
-          <Route path="/Auction/:id" element={<AuctionPage />} />
+          <Route path="Home" element={<Home />} />
+          <Route path="Auctions" element={<Home />} />
+          <Route path="Home/Bidding" element={<Home />} />
+          <Route path="Home/Won" element={<Home />} />
+          <Route path="Auction/:id" element={<AuctionPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
-        <Route path="/404" element={<NotFoundPage />} />
+        <Route path="404" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
