@@ -50,7 +50,7 @@ function Login() {
         localStorage.setItem("user_id", user_id);
         await SaveDataToLocal(user_id);
         notyf.success("Welcome back");
-        navigate("Home");
+        navigate("/Home");
       }, 200);
     } else {
       Swal.fire({
