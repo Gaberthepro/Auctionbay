@@ -60,11 +60,11 @@ export function Navbar({ onShowModalAddAuction, onShowModalProfile }: any) {
   };
 
   const handleToAuctioon = () => {
-    navigate("Auctions");
+    navigate("/Auctions");
   };
 
   const handleToProfile = () => {
-    navigate("Home");
+    navigate("/Home");
   };
 
   if (currentURL.toLowerCase().includes("auction")) {

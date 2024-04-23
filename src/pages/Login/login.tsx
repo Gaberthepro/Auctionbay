@@ -8,6 +8,7 @@ import Me from "../../services/me";
 import SaveDataToLocal from "../../services/saveDataToLocal";
 import { Notyf } from "notyf";
 import Logo from "../../assets/images/logo.png";
+import LoginPhoto from "../../assets/images//login.png"
 
 function Login() {
   const [Email, setEmail] = useState("");
@@ -68,7 +69,7 @@ function Login() {
       <div className="container text-center">
         <div className="row">
           <div className="col-12 col-md-7 d-none d-md-block">
-            <img src="src/assets/images/login.png"></img>
+            <img src={LoginPhoto}></img>
           </div>
           <div id="login" className="col-12 col-md-5">
             <div className="logo">
