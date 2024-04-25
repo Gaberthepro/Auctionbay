@@ -215,19 +215,19 @@ const Card: React.FC<AuctionCardProps> = ({ auction }) => {
                     )}
                   </div>
                   <div className="col" id="right-badge">
-                    {over24h ? (
+                  {over24h ? (
                       <span
                         id="clock-badge-less-24"
                         className="badge rounded-pill text-bg-danger"
                       >
-                        {diffInHours} h <FontAwesomeIcon icon={faClock} />
+                        {diffInDays} days <FontAwesomeIcon icon={faClock} />
                       </span>
                     ) : (
                       <span
                         id="clock-badge"
                         className="badge rounded-pill text-bg-danger"
                       >
-                        24 <FontAwesomeIcon icon={faClock} />
+                        {diffInHours} h <FontAwesomeIcon icon={faClock} />
                       </span>
                     )}
                   </div>
