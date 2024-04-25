@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import SaveDataToLocal from "../../services/saveDataToLocal";
 import Me from "../../services/me";
 import LoginPhoto from "../../assets/images//login.png";
+import Logo from "../../assets/images/logo.png"
 
 function register() {
   const [Name, setName] = useState("");
@@ -99,7 +100,7 @@ function register() {
           </div>
           <div id="login" className="col-12 col-md-5">
             <div className="logo">
-              <img src={LoginPhoto} alt="Avatar" className="avatar" />
+              <img src={Logo} alt="Avatar" className="avatar" />
             </div>
             <div className="Hello">
               <h1>Hello!</h1>
