@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import SaveDataToLocal from "../../services/saveDataToLocal";
 import Me from "../../services/me";
-import LoginPhoto from "../../assets/images//login.png";
 import Logo from "../../assets/images/logo.png"
 
 function register() {
